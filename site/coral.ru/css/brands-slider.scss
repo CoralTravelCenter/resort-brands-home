@@ -1,0 +1,243 @@
+@use '../../common/css/mixins';
+@import url('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css');
+
+section.resort-brands > article .contenu {
+  > .brand-header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    @include mixins.respond-up(lg) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    h2 {
+      font-weight: 600;
+    }
+
+    .brand-select {
+      position: relative;
+
+      .selectWrapper {
+        position: relative;
+      }
+
+      .selectCustom {
+        position: relative;
+        min-width: 176px;
+
+        &-trigger {
+          font-size: 16px;
+          background-color: #fff;
+          border: 1px solid #D9D9D9;
+          border-radius: 8px;
+          cursor: pointer;
+          padding: 12px;
+          position: relative;
+          width: 100%;
+
+          &::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 12px;
+            width: 12px;
+            height: 12px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M10.9822 2.57141H9.97778C9.90948 2.57141 9.84519 2.60489 9.80501 2.6598L6.0001 7.90445L2.19519 2.6598C2.15501 2.60489 2.09072 2.57141 2.02242 2.57141H1.01796C0.930903 2.57141 0.880011 2.67052 0.930903 2.7415L5.65322 9.25177C5.82465 9.48748 6.17555 9.48748 6.34564 9.25177L11.068 2.7415C11.1202 2.67052 11.0693 2.57141 10.9822 2.57141Z' fill='black' fill-opacity='0.25'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+          }
+
+          &:active {
+            border-color: var(--color_Btn_Bg_Pressed);
+          }
+        }
+
+        &-options {
+          position: absolute;
+          top: 55px;
+          left: 0;
+          width: 100%;
+          border-radius: 0.4rem;
+          background-color: #fff;
+          box-shadow: 0 0 4px #e9e1f8;
+          z-index: 1;
+          display: none;
+        }
+
+        &.isActive .selectCustom-options {
+          display: block;
+        }
+
+        .selectCustom-option {
+          padding: 12px;
+          font-size: 16px;
+
+          &:active {
+            background: #2bb0e829;
+          }
+        }
+      }
+    }
+
+    .brand-nav {
+      display: none;
+      list-style: none;
+      margin: 0;
+      width: 40%;
+      background: #fff;
+      padding: 12px;
+      border-radius: 48px;
+
+      li {
+        flex: 1;
+        padding: 12px;
+        text-align: center;
+        border-radius: 24px;
+        cursor: pointer;
+        transition: all var(--transition);
+      }
+
+      li.active {
+        background: #0093D0;
+        color: #fff;
+      }
+
+      @include mixins.respond-up(lg) {
+        display: flex;
+      }
+    }
+  }
+
+  #resort-brands-mobile-navigation {
+    @include mixins.respond-up(lg) {
+      display: none;
+    }
+  }
+
+  .slider-container {
+    padding: 16px 0 30px 16px;
+    border-radius: 12px;
+    background: #262626;
+    width: 100%;
+
+    @include mixins.respond-up(md) {
+      display: flex;
+      align-items: center;
+    }
+
+    @include mixins.respond-up(lg) {
+      padding: 48px 0 20px 0;
+    }
+  }
+
+  .brand-title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-block: 60px;
+    padding-right: 16px;
+    z-index: 3;
+    position: relative;
+
+    @include mixins.respond-up(md) {
+      width: 40%;
+      flex-shrink: 0;
+    }
+
+    h3 {
+      color: #fff;
+      text-align: center;
+      font-size: 36px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    p {
+      color: #fff;
+      margin-bottom: 32px;
+    }
+
+    .prime-btn {
+      width: fit-content;
+    }
+  }
+
+  .hotel-card {
+    padding: 8px;
+    border-radius: 20px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .visual img {
+      border-radius: 12px;
+    }
+  }
+
+  .swiper {
+    @include mixins.pseudo('before');
+
+    &:before {
+      width: 126px;
+      height: 396px;
+      border-radius: 12px;
+      background: linear-gradient(90deg, rgba(38, 38, 38, 0.00) 0%, #262626 100%);
+      bottom: 0;
+      right: 0;
+      z-index: 2;
+    }
+  }
+
+  .swiper-scrollbar {
+    position: relative;
+    margin-top: 25px;
+    height: 6px;
+    z-index: 3;
+    width: calc(100% - 24px);
+    padding-right: 16px;
+    background: rgba(217, 217, 217, 0.20);
+  }
+
+  .swiper-scrollbar-drag {
+    border-radius: 16px;
+    background: rgba(217, 217, 217, 0.50);
+  }
+
+  .swiper-button {
+    width: 48px;
+    height: 48px;
+    background: #FFFFFF;
+    border-radius: 100%;
+    z-index: 3;
+    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+
+    @include mixins.flex-center();
+
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+
+    &::after,
+    &::before {
+      display: none;
+    }
+  }
+
+  .swiper-button-next.swiper-button-disabled,
+  .swiper-button-prev.swiper-button-disabled {
+    opacity: 0;
+  }
+
+  .swiper-button-next {
+    right: 16px;
+  }
+
+  .swiper-button-prev {
+    left: 16px;
+  }
+}
