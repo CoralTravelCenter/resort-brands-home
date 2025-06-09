@@ -3,6 +3,8 @@
     "sass": "^1.89.1"
   },
   "dependencies": {
-    "swiper": "^11.2.8"
+    "@vueuse/core": "^13.3.0",
+    "swiper": "^11.2.8",
+    "vue": "^3.5.16"
   }
 }
