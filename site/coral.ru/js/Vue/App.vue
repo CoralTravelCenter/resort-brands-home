@@ -1,5 +1,5 @@
 <script setup>
-import {computed, onMounted, provide, reactive, ref} from 'vue'
+import {computed, onMounted, provide, reactive, ref, watch} from 'vue'
 import CountryTabs from '../Vue/components/CountryTabs.vue'
 import CountryView from "./components/CountryView.vue";
 import BrandFilters from "./components/BrandFilters.vue";
@@ -14,10 +14,10 @@ const state = reactive({
 
 provide('brandContext', state)
 
-const locationStorageKey = computed(() => `locations_data_${state.selectedCountry}`)
-const hotelsStorageKey = computed(() => `hotels_data_${state.selectedCountry}`)
+const locationStorageKey = computed(() => `locations_data_${state.selectedCountry}_${state.selectedBrand}`)
+const hotelsStorageKey = computed(() => `hotels_data_${state.selectedCountry}_${state.selectedBrand}`)
 const currentHotels = computed(() => {
-	if (!state.selectedCountry || !state.selectedBrand || state.selectedCountry === 'all') return {}
+	if (!state.selectedCountry || !state.selectedBrand || state.selectedCountry === 'Все страны') return {}
 
 	const countryObj = COUNTRIES.find(obj => Object.keys(obj)[0] === state.selectedCountry)
 	if (!countryObj) return {}
@@ -27,16 +27,22 @@ const currentHotels = computed(() => {
 })
 const isLoading = ref(true) // Флаг загрузки данных
 const hotelsData = ref(null) // Хранение данных
-// const filteredData = useFilteredData(currentHotels, hotelsData)
-onMounted(() => {
-	fetchHotelsData(
-			locationStorageKey,
-			hotelsStorageKey,
-			currentHotels,
-			isLoading,
-			hotelsData
-	)
-})
+provide('hotelsData', hotelsData)
+provide('isLoading', isLoading)
+onMounted(() => fetchHotelsData(
+		locationStorageKey,
+		hotelsStorageKey,
+		currentHotels,
+		isLoading,
+		hotelsData
+))
+watch(currentHotels, () => fetchHotelsData(
+		locationStorageKey,
+		hotelsStorageKey,
+		currentHotels,
+		isLoading,
+		hotelsData
+))
 </script>
 
 <template>
@@ -52,6 +58,7 @@ onMounted(() => {
 .app-container {
 	width: 100%;
 	display: grid;
+	overflow: hidden;
 	grid-template-columns: 1fr 1fr;
 	grid-template-areas:
     "headline country-nav"

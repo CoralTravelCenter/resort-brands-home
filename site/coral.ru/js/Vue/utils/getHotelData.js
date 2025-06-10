@@ -4,8 +4,8 @@ import {getParsedRating} from "./getParsedRating";
 
 export async function getHotelData(arrivalLocationsArr) {
   try {
-    const beginSearchDate = addDays(window.data_onlyhotel_lookup_depth_days)
-    const lookupNights = window.data_onlyhotel_lookup_nights
+    const beginSearchDate = addDays(14)
+    const lookupNights = 6
     const response = await doRequestToServer(endpointUrl(HOTEL_PRICE_API),
       {
         searchCriterias: {
@@ -40,7 +40,6 @@ export async function getHotelData(arrivalLocationsArr) {
         }
       },
     )
-    console.log(response?.result)
     const hotelCategories = response?.result?.hotelCategories ?? {}
     const products = response?.result?.products ?? [];
     return products.map(obj => {

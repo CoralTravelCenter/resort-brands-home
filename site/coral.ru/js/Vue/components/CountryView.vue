@@ -41,7 +41,8 @@ const hotelsByBrand = computed(() => {
 	display: flex;
 	background: #262626;
 	border-radius: 12px;
-	padding: 21px 0 21px 48px;
+	padding: 21px 0;
+	flex-shrink: 0;
 	margin-top: 16px;
 }
 
@@ -50,6 +51,7 @@ const hotelsByBrand = computed(() => {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 }
 
 h3 {

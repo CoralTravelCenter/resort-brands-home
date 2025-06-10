@@ -1,7 +1,6 @@
 <script setup>
 import {computed, inject} from 'vue'
 import {register} from 'swiper/element/bundle'
-import NavBtn from './NavBtn.vue'
 import {COUNTRIES} from "../../data";
 
 register()
@@ -9,7 +8,7 @@ register()
 const context = inject('brandContext')
 
 const brandFilters = computed(() => {
-	if (context.selectedCountry === 'all') {
+	if (context.selectedCountry === 'Все страны') {
 		return COUNTRIES.flatMap(obj => {
 			const [, countryData] = Object.entries(obj)[0]
 			return Object.keys(countryData)
@@ -25,7 +24,7 @@ const brandFilters = computed(() => {
 
 <template>
 	<div class="carousel-wrapper">
-		<NavBtn type="prev"/>
+
 
 		<swiper-container
 				:key="context.selectedCountry"
@@ -33,10 +32,6 @@ const brandFilters = computed(() => {
 				loop="true"
 				space-between="24"
 				class="brand-swiper"
-				:navigation="{
-        nextEl: '.swiper-nav-btn-next',
-        prevEl: '.swiper-nav-btn-prev'
-      }"
 		>
 			<swiper-slide
 					v-for="brand in brandFilters"
@@ -55,7 +50,7 @@ const brandFilters = computed(() => {
 			</swiper-slide>
 		</swiper-container>
 
-		<NavBtn type="next"/>
+
 	</div>
 </template>
 
@@ -67,6 +62,7 @@ const brandFilters = computed(() => {
 	justify-content: center;
 	height: auto;
 	padding-block: 12px;
+	cursor: pointer;
 }
 
 .swiper-slide.js-active {

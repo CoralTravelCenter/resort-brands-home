@@ -1,11 +1,196 @@
-<script setup lang="ts">
+<script setup>
+import {inject} from "vue";
+import {priceCalculation} from "../utils/priceCalculation";
+import SliderSkeletor from "./SliderSkeletor.vue";
+import NavBtn from "./NavBtn.vue";
 
+const isLoading = inject("isLoading");
+const serverData = inject('hotelsData')
 </script>
 
 <template>
-
+	<div class="carousel-wrapper">
+		<SliderSkeletor v-if="isLoading" width="100"/>
+		<swiper-container
+				v-else
+				slides-per-view="2.2"
+				space-between="24"
+				scrollbar="true"
+				:navigation="{
+					prevEl: '.swiper-nav-btn-prev',
+					nextEl: '.swiper-nav-btn-next'
+				}"
+		>
+			<swiper-slide v-for="slide in serverData" :key="slide.name">
+				<div class="visual">
+					<img :alt="slide.name" :src="slide.img"/>
+				</div>
+				<span class="location">
+				<svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+  <path
+			d="M12.8337 5.66683C12.8337 9.72673 8.50032 14.6668 8.50032 14.6668C8.50032 14.6668 4.16699 9.72673 4.16699 5.66683C4.16699 3.2736 6.10709 1.3335 8.50032 1.3335C10.8936 1.3335 12.8337 3.2736 12.8337 5.66683Z"
+			stroke="#535353" stroke-width="0.5" stroke-linejoin="round"/>
+  <path
+			d="M8.5 7.66699C9.60457 7.66699 10.5 6.77156 10.5 5.66699C10.5 4.56242 9.60457 3.66699 8.5 3.66699C7.39543 3.66699 6.5 4.56242 6.5 5.66699C6.5 6.77156 7.39543 7.66699 8.5 7.66699Z"
+			stroke="#535353" stroke-width="0.5" stroke-linejoin="round"/>
+</svg>
+				{{ slide.location_name }}
+			</span>
+				<span class="hotel-name">
+				{{ slide.name }}
+			</span>
+				<div v-if="typeof slide.rating === 'number'" class="hotel-rating">
+					<img v-for="n in slide.rating" :key="n"
+							 src="//b2ccdn.coral.ru/content/landing-pages/vue_map_slider/rating-icon.svg"/>
+				</div>
+				<p v-else class="category">{{ slide.rating }}</p>
+				<div style="margin-top: auto;">
+					<span class="hotel-price">
+			от {{ priceCalculation(slide.price) }}
+			</span>
+					<span
+							class="attention">* Цена указана из расчета проживания не менее 7 ночей, за одного туриста, без перелета</span>
+				</div>
+			</swiper-slide>
+		</swiper-container>
+		<NavBtn type="prev"/>
+		<NavBtn type="next"/>
+	</div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@use '../../../../common/css/mixins';
 
+.visual {
+	height: 170px;
+}
+
+.carousel-wrapper {
+	width: 60%;
+	height: 100%;
+	position: relative;
+}
+
+swiper-container {
+	@include mixins.pseudo('after');
+
+	&:after {
+		width: 126px;
+		height: 100%;
+		top: 0;
+		right: 0;
+		z-index: 3;
+		background: linear-gradient(90deg, rgba(38, 38, 38, 0.00) 0%, #262626 100%);
+	}
+
+	&::part(scrollbar) {
+		position: relative;
+		margin-top: 21px;
+		border-radius: 16px;
+		background: rgba(217, 217, 217, 0.20);
+	}
+}
+
+.nav-btn {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 3;
+	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.nav-btn-prev {
+	left: 16px;
+}
+
+.nav-btn-next {
+	right: 16px;
+}
+
+swiper-slide {
+	border-radius: 20px;
+	background: #FFF;
+	padding: 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.visual img {
+	border-radius: 12px;
+}
+
+.location {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	color: rgba(0, 0, 0, 0.65);
+}
+
+.hotel-name {
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.hotel-price {
+	@include mixins.ruble();
+	font-size: 20px;
+	font-weight: 600;
+	color: #0093D0;
+}
+
+.hotel-rating {
+	display: flex;
+
+	img {
+		width: 20px !important;
+		height: 20px !important;
+	}
+}
+
+.attention {
+	color: rgba(0, 0, 0, .65);
+	border-top: 1px solid #f0f0f0;
+	padding-top: .8em;
+	font-size: .625em;
+	line-height: 1.5;
+	display: inline-block;
+}
+
+.swiper-nav-btn {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 5;
+	border: 1px solid #fff;
+	transition: border-color var(--transition);
+
+	svg path {
+		transition: fill var(--transition);
+	}
+
+	&:hover {
+		border-color: var(--color_Btn_Bg_Hover);
+
+		svg path {
+			fill: var(--color_Btn_Bg_Hover);
+		}
+	}
+}
+
+.swiper-nav-btn-prev {
+	left: 16px;
+}
+
+.swiper-nav-btn-next {
+	right: 16px;
+}
+
+.swiper-button-disabled {
+	display: none;
+}
+
+swiper-slide {
+	height: auto;
+}
 </style>

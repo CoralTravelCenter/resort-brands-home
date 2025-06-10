@@ -1,10 +1,14 @@
 {
+  "scripts": {
+    "proxy": "lcp --proxyUrl https://b2capi.coral.ru"
+  },
   "devDependencies": {
     "sass": "^1.89.1"
   },
   "dependencies": {
     "@vueuse/core": "^13.3.0",
     "swiper": "^11.2.8",
-    "vue": "^3.5.16"
+    "vue": "^3.5.16",
+    "vue-skeletor": "^1.0.6"
   }
 }

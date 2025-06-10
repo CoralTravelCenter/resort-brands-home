@@ -1,6 +1,5 @@
-export function findObjectsByExactMatch(objectsArray, stringsArray, field) {
-  const foundObject = objectsArray.find(obj =>
-    stringsArray.value.some(strObj => strObj.name === obj[field])
-  );
-  return foundObject || null;
+export function findObjectsByExactMatch(objectsArray, stringsArray) {
+  return objectsArray.find(obj =>
+    stringsArray.value.includes(obj.name)
+  ) || null;
 }

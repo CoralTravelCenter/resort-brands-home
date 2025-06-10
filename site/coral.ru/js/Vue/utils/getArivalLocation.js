@@ -6,19 +6,18 @@ export async function getArrivalLocation(hotels) {
     console.error("getArrivalLocation: передан пустой или некорректный массив отелей", hotels.value);
     return [];
   }
-
   try {
     const responses = await Promise.all(
       hotels.value.map(hotel => {
-        return doRequestToServer(endpointUrl(ARRIVAL_LOCATIONS_API), {text: hotel.name})
+        return doRequestToServer(endpointUrl(ARRIVAL_LOCATIONS_API), {text: hotel})
       })
     )
 
     return responses
       .map(response => {
         const locations = response.result.locations
-        const correctLocation = findObjectsByExactMatch(locations, hotels, "name")
-
+        const correctLocation = findObjectsByExactMatch(locations, hotels)
+        console.log(correctLocation)
         return correctLocation
           ? {
             id: correctLocation.id.split('-')[0],

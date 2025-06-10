@@ -2,10 +2,10 @@
 import {computed, inject} from "vue";
 import {COUNTRIES} from "../../data";
 
-const countryMap = computed(() => [
-	'Все страны',
-	...COUNTRIES.map(item => Object.keys(item)[0])
-])
+const countryMap = computed(() => {
+	const countriesArr = COUNTRIES.flatMap(obj => Object.keys(obj))
+	return ['Все страны', ...countriesArr]
+})
 const context = inject('brandContext')
 </script>
 
@@ -42,6 +42,10 @@ const context = inject('brandContext')
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.country-tabs li:hover {
+	color: #0093d0;
 }
 
 .country-tabs li.active {
