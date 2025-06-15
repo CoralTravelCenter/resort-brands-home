@@ -1,55 +1,71 @@
 <script setup>
-import {computed, onMounted, provide, reactive, ref, watch} from 'vue'
+import {computed, onMounted, provide, reactive, ref, watch, watchEffect} from 'vue'
 import CountryTabs from '../Vue/components/CountryTabs.vue'
 import CountryView from "./components/CountryView.vue";
 import BrandFilters from "./components/BrandFilters.vue";
 import {COUNTRIES, SLOGANS} from "../data";
 import {fetchHotelsData} from "./utils/fetchHotelsData";
+import CountrySelect from "./components/CountrySelect.vue";
+import {useMediaQuery} from "@vueuse/core";
+import {getBrandsByCountry} from "./utils/getBrandsByCountry";
+import {getHotelsByCountryAndBrand} from "./utils/getHotelsByCountryAndBrand";
 
-// Состояние: текущая страна и бренд
-const state = reactive({
-	selectedCountry: 'Турция',
-	selectedBrand: 'EFTALIA HOTELS',
-})
-
-provide('brandContext', state)
-
-const locationStorageKey = computed(() => `locations_data_${state.selectedCountry}_${state.selectedBrand}`)
-const hotelsStorageKey = computed(() => `hotels_data_${state.selectedCountry}_${state.selectedBrand}`)
+const currentCountry = ref('Турция');
+const currentBrands = computed(() => {
+	if (COUNTRIES) {
+		return getBrandsByCountry(COUNTRIES, currentCountry);
+	}
+});
+const currentBrand = ref('')
 const currentHotels = computed(() => {
-	if (!state.selectedCountry || !state.selectedBrand || state.selectedCountry === 'Все страны') return {}
-
-	const countryObj = COUNTRIES.find(obj => Object.keys(obj)[0] === state.selectedCountry)
-	if (!countryObj) return {}
-
-	const countryData = countryObj[state.selectedCountry]
-	return countryData[state.selectedBrand] || {}
+	return getHotelsByCountryAndBrand(COUNTRIES, currentCountry, currentBrand)
 })
+provide('currentCountry', currentCountry)
+provide('currentBrand', currentBrand)
+provide('currentBrands', currentBrands)
+provide('currentHotels', currentHotels)
+
+const locationStorageKey = computed(() => `locations_data_${currentCountry.value}_${currentBrand.value}`)
+const hotelsStorageKey = computed(() => `hotels_data_${currentCountry.value}_${currentBrand.value}`)
+const isLargeScreen = useMediaQuery('(min-width: 1280px)')
+
 const isLoading = ref(true) // Флаг загрузки данных
-const hotelsData = ref(null) // Хранение данных
+const hotelsData = ref([]) // Хранение данных
 provide('hotelsData', hotelsData)
 provide('isLoading', isLoading)
-onMounted(() => fetchHotelsData(
-		locationStorageKey,
-		hotelsStorageKey,
-		currentHotels,
-		isLoading,
-		hotelsData
-))
-watch(currentHotels, () => fetchHotelsData(
-		locationStorageKey,
-		hotelsStorageKey,
-		currentHotels,
-		isLoading,
-		hotelsData
-))
+
+function setCurrentBrand() {
+	currentBrand.value = currentBrands.value[0]
+}
+
+onMounted(() => {
+	setCurrentBrand()
+	fetchHotelsData(
+			locationStorageKey,
+			hotelsStorageKey,
+			currentHotels,
+			isLoading,
+			hotelsData
+	)
+})
+watchEffect(()=> {
+	setCurrentBrand()
+	fetchHotelsData(
+			locationStorageKey,
+			hotelsStorageKey,
+			currentHotels,
+			isLoading,
+			hotelsData
+	)
+})
 </script>
 
 <template>
 	<div class="app-container">
 		<h2>Бренды, которые создают отдых</h2>
-		<CountryTabs class="country-tabs"/>
-		<CountryView class="slider" :content="SLOGANS"/>
+		<CountryTabs v-if="isLargeScreen" class="country-tabs"/>
+		<CountrySelect v-else/>
+		<CountryView class="slider"/>
 		<BrandFilters class="brands-nav"/>
 	</div>
 </template>

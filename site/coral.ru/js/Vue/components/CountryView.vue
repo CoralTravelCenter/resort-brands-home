@@ -1,38 +1,19 @@
 <script setup>
-import {computed, inject} from "vue";
+import {inject} from "vue";
 import HotelsSlider from "./HotelsSlider.vue";
-import {COUNTRIES} from "../../data";
+import {SLOGANS} from "../../data";
 
-const props = defineProps({
-	content: Array
-})
-
-const context = inject('brandContext')
-const selectedBrand = computed(() => {
-	return props.content.find(item => item.name === context.selectedBrand)
-})
-
-const hotelsByBrand = computed(() => {
-	if (!context.selectedBrand || !context.selectedCountry || context.selectedCountry === 'Все страны') {
-		return []
-	}
-
-	const countryObj = COUNTRIES.find(obj => Object.keys(obj)[0] === context.selectedCountry)
-	if (!countryObj) return []
-
-	const brands = countryObj[context.selectedCountry]
-	return brands?.[context.selectedBrand] || {}
-})
+const currentBrand = inject('currentBrand')
+const currentSlogan = SLOGANS.find(obj => obj.name === currentBrand.value)
 </script>
 
 <template>
 	<div class="country-view">
 		<div class="country-view-action">
-			<h3>{{ selectedBrand.name }}</h3>
-			<span>{{ selectedBrand.slogan }}</span>
-			<div class="prime-btn">Посмотреть отели</div>
+			<h3>{{ currentBrand }}</h3>
+			<span>{{ currentSlogan.slogan }}</span>
 		</div>
-		<HotelsSlider :data="hotelsByBrand"/>
+		<HotelsSlider/>
 	</div>
 </template>
 

@@ -5,7 +5,7 @@ import {StorageSerializers, useSessionStorage} from "@vueuse/core";
 
 export async function fetchHotelsData(locationStorageKey, hotelsStorageKey, currentHotels, isLoading, hotelsData) {
   isLoading.value = true // Устанавливаем флаг загрузки
-  hotelsData.value = null; // Очищаем предыдущие данные
+  hotelsData.value = []; // Очищаем предыдущие данные
 
   // Создаем новые sessionStorage переменные для текущей вкладки
   const locationResponses = useSessionStorage(locationStorageKey.value, null, {

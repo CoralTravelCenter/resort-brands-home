@@ -103,10 +103,6 @@ export const COUNTRIES = [
         "NOVOTEL PALM",
         "SWISSOTEL SHARM EL SHEIKH ALL INCLUSIVE COLLECTION"
       ],
-      "Coral group hotels": [
-        "SEVEN SEAS JOLIE BAY",
-        "XANADU MAKADI BAY"
-      ],
       "Jaz Group": [
         "JAZ AQUAMARINE",
         "JAZ AQUAVIVA",
@@ -312,3 +308,5 @@ export const SLOGANS = [
     "slogan": "Пионеры искусства ответственного гостеприимства"
   }
 ];
+
+export const SEACH_DEPTH = 30

@@ -2,10 +2,11 @@
 import {inject} from "vue";
 import {priceCalculation} from "../utils/priceCalculation";
 import SliderSkeletor from "./SliderSkeletor.vue";
-import NavBtn from "./NavBtn.vue";
+import {SEACH_DEPTH} from "../../data";
 
 const isLoading = inject("isLoading");
 const serverData = inject('hotelsData')
+const currentCountry = inject("currentCountry");
 </script>
 
 <template>
@@ -17,8 +18,8 @@ const serverData = inject('hotelsData')
 				space-between="24"
 				scrollbar="true"
 				:navigation="{
-					prevEl: '.swiper-nav-btn-prev',
-					nextEl: '.swiper-nav-btn-next'
+					prevEl: '.main-slider-bnt-prev',
+					nextEl: '.main-slider-bnt-prev'
 				}"
 		>
 			<swiper-slide v-for="slide in serverData" :key="slide.name">
@@ -45,16 +46,31 @@ const serverData = inject('hotelsData')
 				</div>
 				<p v-else class="category">{{ slide.rating }}</p>
 				<div style="margin-top: auto;">
-					<span class="hotel-price">
-			от {{ priceCalculation(slide.price) }}
-			</span>
+					<div class="hotel-price">
+					<span>от {{ priceCalculation(slide.price) }}</span>
+						<a href="#" class="prime-btn custom"
+							 :data-onlyhotel-lookup-destination="currentCountry"
+							 :data-onlyhotel-lookup-regions="slide.name"
+							 :data-onlyhotel-lookup-depth-days="SEACH_DEPTH"
+						>
+							Забронировать
+						</a>
+			</div>
 					<span
 							class="attention">* Цена указана из расчета проживания не менее 7 ночей, за одного туриста, без перелета</span>
 				</div>
 			</swiper-slide>
 		</swiper-container>
-		<NavBtn type="prev"/>
-		<NavBtn type="next"/>
+		<button class="custom-slider-nav-btn main-slider-bnt-prev">
+			<svg fill="none" height="9" viewBox="0 0 5 9" width="5" xmlns="http://www.w3.org/2000/svg">
+				<path d="M4.58325 1.16504L1.24992 4.49837L4.58325 7.83171" stroke="#535353" stroke-linejoin="round"></path>
+			</svg>
+		</button>
+		<button class="custom-slider-nav-btn main-slider-bnt-next">
+			<svg fill="none" height="9" viewBox="0 0 6 9" width="6" xmlns="http://www.w3.org/2000/svg">
+				<path d="M1.25 1.16504L4.58333 4.49837L1.25 7.83171" stroke="#535353" stroke-linejoin="round"></path>
+			</svg>
+		</button>
 	</div>
 </template>
 
@@ -80,7 +96,8 @@ swiper-container {
 		top: 0;
 		right: 0;
 		z-index: 3;
-		background: linear-gradient(90deg, rgba(38, 38, 38, 0.00) 0%, #262626 100%);
+		pointer-events: none;
+		background: linear-gradient(90deg, rgba(38, 38, 38, 0.00) 0%, #262626 130%);
 	}
 
 	&::part(scrollbar) {
@@ -125,6 +142,10 @@ swiper-slide {
 	align-items: center;
 	gap: 4px;
 	color: rgba(0, 0, 0, 0.65);
+
+	svg {
+		flex-shrink: 0;
+	}
 }
 
 .hotel-name {
@@ -133,7 +154,15 @@ swiper-slide {
 }
 
 .hotel-price {
-	@include mixins.ruble();
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	margin-bottom: 8px;
+
+	span {
+		@include mixins.ruble();
+	}
 	font-size: 20px;
 	font-weight: 600;
 	color: #0093D0;
@@ -157,32 +186,11 @@ swiper-slide {
 	display: inline-block;
 }
 
-.swiper-nav-btn {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	z-index: 5;
-	border: 1px solid #fff;
-	transition: border-color var(--transition);
-
-	svg path {
-		transition: fill var(--transition);
-	}
-
-	&:hover {
-		border-color: var(--color_Btn_Bg_Hover);
-
-		svg path {
-			fill: var(--color_Btn_Bg_Hover);
-		}
-	}
-}
-
-.swiper-nav-btn-prev {
+.main-slider-bnt-prev {
 	left: 16px;
 }
 
-.swiper-nav-btn-next {
+.main-slider-bnt-next {
 	right: 16px;
 }
 
@@ -192,5 +200,11 @@ swiper-slide {
 
 swiper-slide {
 	height: auto;
+}
+
+.prime-btn.custom {
+	padding: 10px !important;
+	height: unset !important;
+	font-size: 14px !important;
 }
 </style>

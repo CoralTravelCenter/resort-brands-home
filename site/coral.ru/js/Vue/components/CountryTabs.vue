@@ -2,11 +2,10 @@
 import {computed, inject} from "vue";
 import {COUNTRIES} from "../../data";
 
+const currentCountry = inject('currentCountry')
 const countryMap = computed(() => {
-	const countriesArr = COUNTRIES.flatMap(obj => Object.keys(obj))
-	return ['Все страны', ...countriesArr]
+	return  COUNTRIES.flatMap(obj => Object.keys(obj))
 })
-const context = inject('brandContext')
 </script>
 
 <template>
@@ -14,8 +13,8 @@ const context = inject('brandContext')
 		<li
 				v-for="country in countryMap"
 				:key="country"
-				:class="{ active: context.selectedCountry === country }"
-				@click="context.selectedCountry = country"
+				:class="{ active: currentCountry === country }"
+				@click="currentCountry = country"
 		>
 			{{ country }}
 		</li>

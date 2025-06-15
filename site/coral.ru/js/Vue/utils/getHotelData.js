@@ -1,10 +1,11 @@
 import {doRequestToServer, endpointUrl, HOTEL_PRICE_API} from "../../api";
 import {addDays} from "./getAddDays";
 import {getParsedRating} from "./getParsedRating";
+import {SEACH_DEPTH} from "../../data";
 
 export async function getHotelData(arrivalLocationsArr) {
   try {
-    const beginSearchDate = addDays(14)
+    const beginSearchDate = addDays(SEACH_DEPTH)
     const lookupNights = 6
     const response = await doRequestToServer(endpointUrl(HOTEL_PRICE_API),
       {

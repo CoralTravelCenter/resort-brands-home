@@ -17,7 +17,6 @@ export async function getArrivalLocation(hotels) {
       .map(response => {
         const locations = response.result.locations
         const correctLocation = findObjectsByExactMatch(locations, hotels)
-        console.log(correctLocation)
         return correctLocation
           ? {
             id: correctLocation.id.split('-')[0],

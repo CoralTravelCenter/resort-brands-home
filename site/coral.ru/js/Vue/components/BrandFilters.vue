@@ -1,45 +1,37 @@
 <script setup>
-import {computed, inject} from 'vue'
+import {inject} from 'vue'
 import {register} from 'swiper/element/bundle'
-import {COUNTRIES} from "../../data";
+import PrevSliderBtn from "./PrevSliderBtn.vue";
+import NextSliderBtn from "./NextSliderBtn.vue";
 
 register()
 
-const context = inject('brandContext')
-
-const brandFilters = computed(() => {
-	if (context.selectedCountry === 'Все страны') {
-		return COUNTRIES.flatMap(obj => {
-			const [, countryData] = Object.entries(obj)[0]
-			return Object.keys(countryData)
-		})
-	}
-
-	const countryObj = COUNTRIES.find(obj => Object.keys(obj)[0] === context.selectedCountry)
-	if (!countryObj) return []
-	const countryData = countryObj[context.selectedCountry]
-	return Object.keys(countryData)
-})
+const currentBrands = inject('currentBrands')
+const currentCountry = inject('currentCountry')
+const currentBrand = inject('currentBrand')
 </script>
 
 <template>
 	<div class="carousel-wrapper">
-
-
+		<PrevSliderBtn class="filter-slider-bnt-prev"/>
+		<NextSliderBtn class="filter-slider-bnt-next"/>
 		<swiper-container
-				:key="context.selectedCountry"
+				:key="currentCountry"
 				slides-per-view="auto"
 				loop="true"
 				space-between="24"
 				class="brand-swiper"
 		>
 			<swiper-slide
-					v-for="brand in brandFilters"
+					v-for="brand in currentBrands"
 					:key="brand"
 					class="swiper-slide"
-					:data-filter="context.selectedBrand"
-					:class="{ 'js-active': context.selectedBrand === brand }"
-					@click="context.selectedBrand = brand"
+					:class="{ 'js-active': currentBrand === brand }"
+					@click="currentBrand = brand"
+					:navigation="{
+						prevEl: '.filter-slider-bnt-prev',
+						nextEl: '.filter-slider-bnt-next'
+					}"
 			>
 				<img
 						:src="`https://b2ccdn.coral.ru/content/landing-pages/resort-brands-home/${brand}.png`"
@@ -49,8 +41,6 @@ const brandFilters = computed(() => {
 				/>
 			</swiper-slide>
 		</swiper-container>
-
-
 	</div>
 </template>
 
