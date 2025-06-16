@@ -100,6 +100,13 @@ swiper-container {
 		background: linear-gradient(90deg, rgba(38, 38, 38, 0.00) 0%, #262626 130%);
 	}
 
+	&::part(button-next) {
+		display: none;
+	}
+
+	&::part(button-prev) {
+		display: none;
+	}
 
 	&::part(scrollbar) {
 		position: relative;

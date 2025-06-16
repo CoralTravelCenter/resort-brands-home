@@ -12,29 +12,29 @@ export const COUNTRIES = [
         "LIBERTY HOTELS LYKIA ADULT ONLY",
         "LIBERTY SIGNA"
       ],
-      "MARVIDA HOTELS": [
-        "MARVIDA FAMILY ECO EX. OTIUM FAMILY ECO CLUB",
-        "MARVIDA HOTEL AKMAN PARK",
-        "MARVIDA HOTEL HAPPY SUITES",
-        "MARVIDA SENSES VERY CHIC"
-      ],
+      // "MARVIDA HOTELS": [
+      //   "MARVIDA FAMILY ECO EX. OTIUM FAMILY ECO CLUB",
+      //   "MARVIDA HOTEL AKMAN PARK",
+      //   "MARVIDA HOTEL HAPPY SUITES",
+      //   "MARVIDA SENSES VERY CHIC"
+      // ],
       "MAXX ROYAL": [
         "MAXX ROYAL BELEK GOLF RESORT",
         "MAXX ROYAL KEMER RESORT"
       ],
-      "SEVEN SEAS RESORTS & HOTELS": [
-        "SEVEN SEAS HOTEL BLUE",
-        "SEVEN SEAS HOTEL LIFE",
-        "SEVEN SEAS PALMERAS BAY"
-      ],
+      // "SEVEN SEAS RESORTS & HOTELS": [
+      //   "SEVEN SEAS HOTEL BLUE",
+      //   "SEVEN SEAS HOTEL LIFE",
+      //   "SEVEN SEAS PALMERAS BAY"
+      // ],
       "VOYAGE HOTELS": [
         "VOYAGE BELEK GOLF & SPA",
         "VOYAGE SORGUN"
       ],
-      "XANADU RESORT": [
-        "XANADU ISLAND HOTEL",
-        "XANADU RESORT"
-      ]
+      // "XANADU RESORT": [
+      //   "XANADU ISLAND HOTEL",
+      //   "XANADU RESORT"
+      // ]
     }
   },
   {
@@ -61,8 +61,8 @@ export const COUNTRIES = [
         "TITANIC RESORT & AQUA PARK",
         "TITANIC ROYAL"
       ],
-      "Xandu Resort": ["XANADU MAKADI BAY"],
-      "Seven Seas Resorts & Hotels": ["SEVEN SEAS JOLIE BAY"]
+      // "Xandu Resort": ["XANADU MAKADI BAY"],
+      // "Seven Seas Resorts & Hotels": ["SEVEN SEAS JOLIE BAY"]
     }
   },
   {
