@@ -6,35 +6,31 @@ export const COUNTRIES = [
         "GLORIA SERENITY RESORT",
         "GLORIA VERDE RESORT"
       ],
+      "RIXOS": [
+        "CLUB PRIVE BY RIXOS BELEK",
+        "RIXOS DOWNTOWN ANTALYA - THE LAND OF LEGENDS FREE ACCESS",
+        "RIXOS PARK BELEK - THE LAND OF LEGENDS FREE ACCESS",
+        "RIXOS PREMIUM BELEK - THE LAND OF LEGENDS FREE ACCESS",
+        "RIXOS PREMIUM TEKIROVA - THE LAND OF LEGENDS FREE ACCESS",
+        "RIXOS SUNGATE - THE LAND OF LEGENDS FREE ACCESS",
+        "CLUB PRIVE BY RIXOS GOCEK",
+        "THE LAND OF LEGENDS - KINGDOM HOTEL",
+        "THE LAND OF LEGENDS NICKELODEON HOTEL & RESORT"
+      ],
       "LIBERTY HOTELS": [
         "LIBERTY FABAY",
         "LIBERTY HOTELS LYKIA",
         "LIBERTY HOTELS LYKIA ADULT ONLY",
         "LIBERTY SIGNA"
       ],
-      // "MARVIDA HOTELS": [
-      //   "MARVIDA FAMILY ECO EX. OTIUM FAMILY ECO CLUB",
-      //   "MARVIDA HOTEL AKMAN PARK",
-      //   "MARVIDA HOTEL HAPPY SUITES",
-      //   "MARVIDA SENSES VERY CHIC"
-      // ],
       "MAXX ROYAL": [
         "MAXX ROYAL BELEK GOLF RESORT",
         "MAXX ROYAL KEMER RESORT"
       ],
-      // "SEVEN SEAS RESORTS & HOTELS": [
-      //   "SEVEN SEAS HOTEL BLUE",
-      //   "SEVEN SEAS HOTEL LIFE",
-      //   "SEVEN SEAS PALMERAS BAY"
-      // ],
       "VOYAGE HOTELS": [
         "VOYAGE BELEK GOLF & SPA",
         "VOYAGE SORGUN"
       ],
-      // "XANADU RESORT": [
-      //   "XANADU ISLAND HOTEL",
-      //   "XANADU RESORT"
-      // ]
     }
   },
   {
@@ -47,6 +43,13 @@ export const COUNTRIES = [
         "PICKALBATROS DANA BEACH RESORT",
         "PICKALBATROS JUNGLE AQUA PARK RESORT - NEVERLAND HURGHADA",
         "PICKALBATROS LAGUNA VISTA HOTEL-SSH"
+      ],
+      "RIXOS": [
+        "RIXOS PREMIUM MAGAWISH",
+        "CLUB PRIVÉ BY RIXOS SHARM EL SHEIKH",
+        "RIXOS PREMIUM SEAGATE",
+        "RIXOS RADAMIS SHARM El SHEIKH",
+        "RIXOS SHARM EL SHEIKH"
       ],
       "SUNRISE HOTELS & RESORTS": [
         "SUNRISE GRAND SELECT ARABIAN BEACH RESORT",
@@ -61,8 +64,6 @@ export const COUNTRIES = [
         "TITANIC RESORT & AQUA PARK",
         "TITANIC ROYAL"
       ],
-      // "Xandu Resort": ["XANADU MAKADI BAY"],
-      // "Seven Seas Resorts & Hotels": ["SEVEN SEAS JOLIE BAY"]
     }
   },
   {
@@ -71,6 +72,10 @@ export const COUNTRIES = [
         "FAIRMONT AJMAN",
         "FAIRMONT FUJAIRAH",
         "FAIRMONT THE PALM"
+      ],
+      "RIXOS": [
+        "RIXOS AL MAIRID RAS AL KHAIMAH",
+        "RIXOS BAB AL BAHR"
       ],
       "JUMEIRAH": [
         "JUMEIRAH AL NASEEM DUBAI",
@@ -141,4 +146,4 @@ export const DEFAULT_COUNTRY = 'Турция'
 
 export const CURRENT_BRAND = 'GLORIA HOTELS'
 
-export const SEARCH_DEPTH = 30
+export const SEARCH_DEPTH = 21

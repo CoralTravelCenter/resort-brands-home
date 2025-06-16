@@ -1,5 +1,5 @@
 <script setup>
-import {computed, onMounted, provide, ref, watchEffect} from 'vue'
+import {computed, onMounted, provide, ref, watch, watchEffect} from 'vue'
 import CountryTabs from '../Vue/components/CountryTabs.vue'
 import CountryView from "./components/CountryView.vue";
 import BrandFilters from "./components/BrandFilters.vue";
@@ -34,10 +34,6 @@ const hotelsData = ref([]) // Хранение данных
 provide('hotelsData', hotelsData)
 provide('isLoading', isLoading)
 
-function setCurrentBrand() {
-	currentBrand.value = currentBrands.value[0]
-}
-
 onMounted(() => {
 	fetchHotelsData(
 			locationStorageKey,
@@ -47,15 +43,17 @@ onMounted(() => {
 			hotelsData
 	)
 })
+watch(currentCountry, () => {
+	currentBrand.value = currentBrands.value[0]
+});
 watchEffect(() => {
-	setCurrentBrand()
 	fetchHotelsData(
 			locationStorageKey,
 			hotelsStorageKey,
 			currentHotels,
 			isLoading,
 			hotelsData
-	)
+	);
 })
 </script>
 
@@ -65,7 +63,7 @@ watchEffect(() => {
 		<CountryTabs v-if="isLargeScreen" class="country-tabs"/>
 		<CountrySelect v-else/>
 		<CountryView class="slider"/>
-		<BrandFilters v-model="currentBrand" class="brands-nav"/>
+		<BrandFilters class="brands-nav"/>
 	</div>
 </template>
 

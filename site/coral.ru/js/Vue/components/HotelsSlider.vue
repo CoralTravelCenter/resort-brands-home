@@ -3,24 +3,25 @@ import {inject} from "vue";
 import {priceCalculation} from "../utils/priceCalculation";
 import SliderSkeletor from "./SliderSkeletor.vue";
 import {SEARCH_DEPTH} from "../../data";
+import {register} from "swiper/element";
+
+register()
 
 const isLoading = inject("isLoading");
 const serverData = inject('hotelsData')
 const currentCountry = inject("currentCountry");
+
 </script>
 
 <template>
 	<div class="carousel-wrapper">
 		<SliderSkeletor v-if="isLoading" width="100"/>
 		<swiper-container
+				ref="hotelsSwiper"
 				v-else
 				slides-per-view="2.2"
 				space-between="24"
 				scrollbar="true"
-				:navigation="{
-						prevEl: '.hotels-slider-bnt-prev',
-						nextEl: '.hotels-slider-bnt-next'
-				}"
 		>
 			<swiper-slide v-for="slide in serverData" :key="slide.name">
 				<div class="visual">
