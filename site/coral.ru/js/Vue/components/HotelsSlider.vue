@@ -10,18 +10,16 @@ register()
 const isLoading = inject("isLoading");
 const serverData = inject('hotelsData')
 const currentCountry = inject("currentCountry");
-
 </script>
 
 <template>
 	<div class="carousel-wrapper">
 		<SliderSkeletor v-if="isLoading" width="100"/>
 		<swiper-container
-				ref="hotelsSwiper"
 				v-else
-				slides-per-view="2.2"
-				space-between="24"
-				scrollbar="true"
+				:slides-per-view="2.2"
+				:space-between="24"
+				:scrollbar="true"
 		>
 			<swiper-slide v-for="slide in serverData" :key="slide.name">
 				<div class="visual">
@@ -42,8 +40,7 @@ const currentCountry = inject("currentCountry");
 				{{ slide.name }}
 			</span>
 				<div v-if="typeof slide.rating === 'number'" class="hotel-rating">
-					<img v-for="n in slide.rating" :key="n"
-							 src="//b2ccdn.coral.ru/content/landing-pages/vue_map_slider/rating-icon.svg"/>
+					<img v-for="n in slide.rating" :key="n" alt="Rating Star" src="//b2ccdn.coral.ru/content/landing-pages/vue_map_slider/rating-icon.svg"/>
 				</div>
 				<p v-else class="category">{{ slide.rating }}</p>
 				<div style="margin-top: auto;">
@@ -62,16 +59,6 @@ const currentCountry = inject("currentCountry");
 				</div>
 			</swiper-slide>
 		</swiper-container>
-		<button class="custom-slider-nav-btn hotels-slider-bnt-prev">
-			<svg fill="none" height="9" viewBox="0 0 5 9" width="5" xmlns="http://www.w3.org/2000/svg">
-				<path d="M4.58325 1.16504L1.24992 4.49837L4.58325 7.83171" stroke="#535353" stroke-linejoin="round"></path>
-			</svg>
-		</button>
-		<button class="custom-slider-nav-btn hotels-slider-bnt-next">
-			<svg fill="none" height="9" viewBox="0 0 6 9" width="6" xmlns="http://www.w3.org/2000/svg">
-				<path d="M1.25 1.16504L4.58333 4.49837L1.25 7.83171" stroke="#535353" stroke-linejoin="round"></path>
-			</svg>
-		</button>
 	</div>
 </template>
 
@@ -101,37 +88,12 @@ swiper-container {
 		background: linear-gradient(90deg, rgba(38, 38, 38, 0.00) 0%, #262626 130%);
 	}
 
-	&::part(button-next) {
-		display: none;
-	}
-
-	&::part(button-prev) {
-		display: none;
-	}
-
 	&::part(scrollbar) {
 		position: relative;
 		margin-top: 21px;
 		border-radius: 16px;
 		background: rgba(217, 217, 217, 0.20);
 	}
-}
-
-
-.nav-btn {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	z-index: 3;
-	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-}
-
-.nav-btn-prev {
-	left: 16px;
-}
-
-.nav-btn-next {
-	right: 16px;
 }
 
 swiper-slide {
@@ -197,18 +159,6 @@ swiper-slide {
 	display: inline-block;
 }
 
-.main-slider-bnt-prev {
-	left: 16px;
-}
-
-.main-slider-bnt-next {
-	right: 16px;
-}
-
-.swiper-button-disabled {
-	display: none;
-}
-
 swiper-slide {
 	height: auto;
 }
@@ -217,21 +167,5 @@ swiper-slide {
 	padding: 10px !important;
 	height: unset !important;
 	font-size: 14px !important;
-}
-
-.hotels-slider-bnt-prev {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	left: 16px;
-	z-index: 5;
-}
-
-.hotels-slider-bnt-next {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	right: 16px;
-	z-index: 5;
 }
 </style>
