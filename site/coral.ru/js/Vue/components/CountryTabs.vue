@@ -4,7 +4,7 @@ import {COUNTRIES} from "../../data";
 
 const currentCountry = inject('currentCountry')
 const countryMap = computed(() => {
-	return  COUNTRIES.flatMap(obj => Object.keys(obj))
+	return COUNTRIES.flatMap(obj => Object.keys(obj))
 })
 </script>
 

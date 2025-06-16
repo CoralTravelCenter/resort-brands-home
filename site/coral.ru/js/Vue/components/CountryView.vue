@@ -1,17 +1,19 @@
 <script setup>
-import {inject} from "vue";
+import {computed, inject} from "vue";
 import HotelsSlider from "./HotelsSlider.vue";
 import {SLOGANS} from "../../data";
 
 const currentBrand = inject('currentBrand')
 const currentSlogan = SLOGANS.find(obj => obj.name === currentBrand.value)
+const currentBrandUppercased = computed(() => currentBrand.value.toUpperCase())
 </script>
 
 <template>
 	<div class="country-view">
 		<div class="country-view-action">
-			<h3>{{ currentBrand }}</h3>
-			<span>{{ currentSlogan.slogan }}</span>
+			<h3>{{ currentBrandUppercased }}</h3>
+			<span v-if="currentSlogan">{{ currentSlogan.slogan }}</span>
+			<span v-else>слогана нет</span>
 		</div>
 		<HotelsSlider/>
 	</div>
@@ -36,8 +38,9 @@ const currentSlogan = SLOGANS.find(obj => obj.name === currentBrand.value)
 }
 
 h3 {
-	margin-bottom: 24px !important;
+	margin-bottom: 16px !important;
 	color: #fff;
+	text-align: center;
 }
 
 span {

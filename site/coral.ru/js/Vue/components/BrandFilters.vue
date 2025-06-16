@@ -1,25 +1,34 @@
 <script setup>
 import {inject} from 'vue'
 import {register} from 'swiper/element/bundle'
-import PrevSliderBtn from "./PrevSliderBtn.vue";
-import NextSliderBtn from "./NextSliderBtn.vue";
 
 register()
 
 const currentBrands = inject('currentBrands')
 const currentCountry = inject('currentCountry')
 const currentBrand = inject('currentBrand')
+
+function setCurrentBrand(newBrand) {
+	currentBrand.value = newBrand
+}
 </script>
 
 <template>
 	<div class="carousel-wrapper">
-		<PrevSliderBtn class="filter-slider-bnt-prev"/>
-		<NextSliderBtn class="filter-slider-bnt-next"/>
+		<button class="custom-slider-nav-btn filter-slider-bnt-prev">
+			<svg fill="none" height="9" viewBox="0 0 5 9" width="5" xmlns="http://www.w3.org/2000/svg">
+				<path d="M4.58325 1.16504L1.24992 4.49837L4.58325 7.83171" stroke="#535353" stroke-linejoin="round"></path>
+			</svg>
+		</button>
 		<swiper-container
 				:key="currentCountry"
 				slides-per-view="auto"
 				loop="true"
 				space-between="24"
+				:navigation="{
+						prevEl: '.filter-slider-bnt-prev',
+						nextEl: '.filter-slider-bnt-next'
+				}"
 				class="brand-swiper"
 		>
 			<swiper-slide
@@ -27,11 +36,7 @@ const currentBrand = inject('currentBrand')
 					:key="brand"
 					class="swiper-slide"
 					:class="{ 'js-active': currentBrand === brand }"
-					@click="currentBrand = brand"
-					:navigation="{
-						prevEl: '.filter-slider-bnt-prev',
-						nextEl: '.filter-slider-bnt-next'
-					}"
+					@click="setCurrentBrand(brand)"
 			>
 				<img
 						:src="`https://b2ccdn.coral.ru/content/landing-pages/resort-brands-home/${brand}.png`"
@@ -41,10 +46,20 @@ const currentBrand = inject('currentBrand')
 				/>
 			</swiper-slide>
 		</swiper-container>
+		<button class="custom-slider-nav-btn filter-slider-bnt-next">
+			<svg fill="none" height="9" viewBox="0 0 6 9" width="6" xmlns="http://www.w3.org/2000/svg">
+				<path d="M1.25 1.16504L4.58333 4.49837L1.25 7.83171" stroke="#535353" stroke-linejoin="round"></path>
+			</svg>
+		</button>
 	</div>
 </template>
 
 <style scoped>
+.carousel-wrapper {
+	display: flex;
+	align-items: center;
+}
+
 .swiper-slide {
 	max-width: 90px;
 	display: flex;
