@@ -99,7 +99,7 @@
 
 @mixin ruble {
   &::after {
-    content: "₽";
+    content: "₽/ночь";
     margin-left: 5px;
     font-size: 16px;
   }

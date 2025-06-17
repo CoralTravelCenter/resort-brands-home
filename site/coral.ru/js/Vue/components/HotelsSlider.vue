@@ -16,12 +16,10 @@ const currentCountry = inject("currentCountry");
 				v-else
 				:slides-per-view="1.2"
 				:space-between="24"
-				:scrollbar="true"
+				:loop="true"
 				:navigation="{
-					prevEl: '.slider-bnt-prev',
 					nextEl: '.slider-bnt-next'
 				}"
-				:scrollbar-hide="true"
 				:breakpoints="{
 					1280: {
 						slidesPerView: 2,
@@ -70,11 +68,6 @@ const currentCountry = inject("currentCountry");
 				</div>
 			</swiper-slide>
 		</swiper-container>
-		<button class="custom-slider-nav-btn slider-bnt-prev">
-			<svg fill="none" height="9" viewBox="0 0 5 9" width="5" xmlns="http://www.w3.org/2000/svg">
-				<path d="M4.58325 1.16504L1.24992 4.49837L4.58325 7.83171" stroke="#535353" stroke-linejoin="round"></path>
-			</svg>
-		</button>
 		<button class="custom-slider-nav-btn slider-bnt-next">
 			<svg fill="none" height="9" viewBox="0 0 6 9" width="6" xmlns="http://www.w3.org/2000/svg">
 				<path d="M1.25 1.16504L4.58333 4.49837L1.25 7.83171" stroke="#535353" stroke-linejoin="round"></path>
@@ -85,6 +78,23 @@ const currentCountry = inject("currentCountry");
 
 <style scoped lang="scss">
 @use '../../../../common/css/mixins';
+
+.slider-bnt-prev {
+	left: 16px;
+}
+
+.slider-bnt-next {
+	right: 16px;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
+}
+
+.slider-bnt-next.swiper-button-disabled,
+.slider-bnt-prev.swiper-button-disabled {
+	display: none;
+}
 
 .visual {
 	height: 170px;
@@ -137,6 +147,7 @@ swiper-slide {
 	display: flex;
 	align-items: center;
 	gap: 4px;
+	font-size: 12px;
 	color: rgba(0, 0, 0, 0.65);
 
 	svg {
@@ -145,7 +156,7 @@ swiper-slide {
 }
 
 .hotel-name {
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: 600;
 }
 
@@ -155,22 +166,21 @@ swiper-slide {
 	justify-content: space-between;
 	gap: 8px;
 	margin-bottom: 8px;
-
-	span {
-		@include mixins.ruble();
-	}
-
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: 600;
 	color: #0093D0;
+
+	span {
+		@include mixins.ruble()
+	}
 }
 
 .hotel-rating {
 	display: flex;
 
 	img {
-		width: 20px !important;
-		height: 20px !important;
+		width: 16px !important;
+		height: 16px !important;
 	}
 }
 
@@ -191,5 +201,6 @@ swiper-slide {
 	padding: 10px !important;
 	height: unset !important;
 	font-size: 14px !important;
+	font-weight: 400 !important;
 }
 </style>

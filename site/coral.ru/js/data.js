@@ -76,13 +76,13 @@ export const COUNTRIES = [
         "RIXOS AL MAIRID RAS AL KHAIMAH",
         "RIXOS BAB AL BAHR"
       ],
-      "JUMEIRAH": [
-        "JUMEIRAH AL NASEEM DUBAI",
-        "JUMEIRAH AL QASR DUBAI",
-        "JUMEIRAH BEACH HOTEL DUBAI",
-        "JUMEIRAH DAR AL MASYAF",
-        "JUMEIRAH MINA AL SALAM DUBAI"
-      ]
+      // "JUMEIRAH": [
+      //   "JUMEIRAH AL NASEEM DUBAI",
+      //   "JUMEIRAH AL QASR DUBAI",
+      //   "JUMEIRAH BEACH HOTEL DUBAI",
+      //   "JUMEIRAH DAR AL MASYAF",
+      //   "JUMEIRAH MINA AL SALAM DUBAI"
+      // ]
     }
   },
   {
@@ -99,9 +99,13 @@ export const COUNTRIES = [
 ];
 
 export const SLOGANS = [
+  // {
+  //   "name": "JUMEIRAH",
+  //   "slogan": "Проживайте каждый момент по полной"
+  // },
   {
-    "name": "JUMEIRAH",
-    "slogan": "Проживайте каждый момент по полной"
+    'name': "RIXOS",
+    "slogan": 'Всё включено — всё эксклюзивно'
   },
   {
     "name": "FAIRMONT HOTELS & RESORTS",
@@ -137,7 +141,7 @@ export const SLOGANS = [
   },
   {
     "name": "TITANIC HOTELS & RESORTS",
-    "slogan": "Где вы испытаете комфорт вашего дома где бы ни были"
+    "slogan": "Комфорт вашего дома"
   },
 ];
 

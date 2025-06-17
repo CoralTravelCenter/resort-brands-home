@@ -4,6 +4,11 @@
   --swiper-scrollbar-drag-bg-color: #D9D9D980;
 }
 
+section.resort-brands {
+  @media (max-width: 768px) {
+    padding-inline: 16px;
+  }
+}
 
 section.resort-brands > article .contenu {
   #vue-app {

@@ -1,5 +1,8 @@
 export function priceCalculation(totalPrice) {
   const daysInWeek = 7;
   const persons = 2;
-  return Math.floor(totalPrice / daysInWeek / persons);
+  const calculation = totalPrice / daysInWeek / persons
+  return new Intl.NumberFormat("ru-RU").format(
+    calculation,
+  ).split(',')[0]
 }

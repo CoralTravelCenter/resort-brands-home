@@ -1,5 +1,5 @@
 <script setup>
-import {inject} from 'vue'
+import {computed, inject} from 'vue'
 
 const currentBrands = inject('currentBrands')
 const currentBrand = inject('currentBrand')
@@ -7,14 +7,18 @@ const currentBrand = inject('currentBrand')
 function setCurrentBrand(newBrand) {
 	currentBrand.value = newBrand
 }
+
+const scrollClass = computed(() => {
+	return currentBrands.value.length > 2 ? 'js-scroll' : ''
+})
 </script>
 
 <template>
-	<ul class="brand-list">
+	<ul class="brand-list" :class="scrollClass">
 		<li
 				v-for="brand in currentBrands"
 				:key="brand"
-				:class="{ 'js-active': currentBrand === brand }"
+				:class="{'js-active': currentBrand === brand }"
 				@click="setCurrentBrand(brand)"
 		>
 			<img
@@ -33,15 +37,23 @@ function setCurrentBrand(newBrand) {
 .brand-list {
 	display: flex;
 	align-items: center;
-	justify-content: start;
+	justify-content: center;
 	gap: 24px;
 	list-style: none;
 	padding: 0;
 	margin: 0;
+
+	@include mixins.respond-up(lg) {
+		width: 100%;
+	}
+}
+
+.brand-list.js-scroll {
 	width: 100vw;
 	overflow-x: scroll;
 	scroll-snap-type: x mandatory;
 	padding-inline: 16px;
+	justify-content: start;
 
 	-ms-overflow-style: none; /* Для старых версий IE и Edge */
 	scrollbar-width: none; /* Для Firefox */
@@ -52,6 +64,22 @@ function setCurrentBrand(newBrand) {
 
 	@include mixins.respond-up(lg) {
 		justify-content: center;
+		width: 100%;
+	}
+
+
+	li {
+		flex: 1;
+
+		@include mixins.respond-up(lg) {
+			flex: unset;
+		}
+
+
+		img {
+			width: 80% !important;
+			object-fit: contain !important;
+		}
 	}
 }
 
@@ -60,7 +88,6 @@ li {
 	padding: 16px;
 	cursor: pointer;
 	display: flex;
-	flex: 1;
 	align-items: center;
 	justify-content: center;
 	min-width: 100px;
@@ -71,7 +98,7 @@ li {
 	}
 
 	img {
-		width: 80% !important;
+		width: 50% !important;
 		object-fit: contain !important;
 	}
 }
