@@ -19,22 +19,31 @@ const currentBrandUppercased = computed(() => currentBrand.value.toUpperCase())
 	</div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@use '../../../../common/css/mixins';
+
 .country-view {
 	display: flex;
+	flex-direction: column;
 	background: #262626;
 	border-radius: 12px;
-	padding: 21px 0;
+	padding: 21px 0 21px 16px;
 	flex-shrink: 0;
-	margin-top: 16px;
+
+	@include mixins.respond-up(lg) {
+		flex-direction: row;
+	}
 }
 
 .country-view-action {
-	width: 40%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+
+	@include mixins.respond-up(lg) {
+		width: 40%;
+	}
 }
 
 h3 {

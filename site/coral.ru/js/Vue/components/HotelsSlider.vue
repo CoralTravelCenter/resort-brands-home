@@ -3,9 +3,6 @@ import {inject} from "vue";
 import {priceCalculation} from "../utils/priceCalculation";
 import SliderSkeletor from "./SliderSkeletor.vue";
 import {SEARCH_DEPTH} from "../../data";
-import {register} from "swiper/element";
-
-register()
 
 const isLoading = inject("isLoading");
 const serverData = inject('hotelsData')
@@ -17,9 +14,22 @@ const currentCountry = inject("currentCountry");
 		<SliderSkeletor v-if="isLoading" width="100"/>
 		<swiper-container
 				v-else
-				:slides-per-view="2.2"
+				:slides-per-view="1.2"
 				:space-between="24"
 				:scrollbar="true"
+				:navigation="{
+					prevEl: '.slider-bnt-prev',
+					nextEl: '.slider-bnt-next'
+				}"
+				:scrollbar-hide="true"
+				:breakpoints="{
+					1280: {
+						slidesPerView: 2,
+					},
+					1440: {
+						slidesPerView: 2.3,
+					}
+    		}"
 		>
 			<swiper-slide v-for="slide in serverData" :key="slide.name">
 				<div class="visual">
@@ -40,7 +50,8 @@ const currentCountry = inject("currentCountry");
 				{{ slide.name }}
 			</span>
 				<div v-if="typeof slide.rating === 'number'" class="hotel-rating">
-					<img v-for="n in slide.rating" :key="n" alt="Rating Star" src="//b2ccdn.coral.ru/content/landing-pages/vue_map_slider/rating-icon.svg"/>
+					<img v-for="n in slide.rating" :key="n" alt="Rating Star"
+							 src="//b2ccdn.coral.ru/content/landing-pages/vue_map_slider/rating-icon.svg"/>
 				</div>
 				<p v-else class="category">{{ slide.rating }}</p>
 				<div style="margin-top: auto;">
@@ -59,6 +70,16 @@ const currentCountry = inject("currentCountry");
 				</div>
 			</swiper-slide>
 		</swiper-container>
+		<button class="custom-slider-nav-btn slider-bnt-prev">
+			<svg fill="none" height="9" viewBox="0 0 5 9" width="5" xmlns="http://www.w3.org/2000/svg">
+				<path d="M4.58325 1.16504L1.24992 4.49837L4.58325 7.83171" stroke="#535353" stroke-linejoin="round"></path>
+			</svg>
+		</button>
+		<button class="custom-slider-nav-btn slider-bnt-next">
+			<svg fill="none" height="9" viewBox="0 0 6 9" width="6" xmlns="http://www.w3.org/2000/svg">
+				<path d="M1.25 1.16504L4.58333 4.49837L1.25 7.83171" stroke="#535353" stroke-linejoin="round"></path>
+			</svg>
+		</button>
 	</div>
 </template>
 
@@ -70,9 +91,12 @@ const currentCountry = inject("currentCountry");
 }
 
 .carousel-wrapper {
-	width: 60%;
 	height: 100%;
 	position: relative;
+
+	@include mixins.respond-up(lg) {
+		width: 60%;
+	}
 }
 
 swiper-container {

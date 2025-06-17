@@ -59,43 +59,73 @@ watchEffect(() => {
 
 <template>
 	<div class="app-container">
-		<h2>Бренды, которые создают отдых</h2>
-		<CountryTabs v-if="isLargeScreen" class="country-tabs"/>
-		<CountrySelect v-else/>
+		<div class="headline-wrapper">
+			<h2>Бренды, которые создают отдых</h2>
+			<CountryTabs v-if="isLargeScreen" class="country-tabs"/>
+			<CountrySelect class="country-select" v-else/>
+		</div>
 		<CountryView class="slider"/>
 		<BrandFilters class="brands-nav"/>
 	</div>
 </template>
 
 <style lang="scss" scoped>
+@use '../../../common/css/mixins';
+
 .app-container {
 	width: 100%;
-	display: grid;
 	overflow: hidden;
-	grid-template-columns: 1fr 1fr;
-	grid-template-areas:
-    "headline country-nav"
-    "slider slider"
-    "brands-nav brands-nav";
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
 }
 
 h2 {
-	grid-area: headline;
-	align-self: center;
+	order: 1;
+
+	@include mixins.respond-up(md) {
+		width: 50%;
+	}
 }
 
-.country-tabs {
-	grid-area: country-nav;
-}
+.country-select {
+	align-self: start;
+	order: 2;
 
-.slider {
-	grid-area: slider;
+	@include mixins.respond-up(md) {
+		align-self: center;
+	}
 }
 
 .brands-nav {
-	grid-area: brands-nav;
+	order: 3;
+
+	@include mixins.respond-up(lg) {
+		order: 4;
+	}
+}
+
+.slider {
+	order: 4;
+
+	@include mixins.respond-up(lg) {
+		order: 3;
+	}
+}
+
+.headline-wrapper {
 	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
 	align-items: center;
 	gap: 16px;
+
+	@include mixins.respond-up(md) {
+		flex-direction: row;
+	}
+
+	@include mixins.respond-up(xl) {
+		flex-direction: row-reverse;
+	}
 }
 </style>

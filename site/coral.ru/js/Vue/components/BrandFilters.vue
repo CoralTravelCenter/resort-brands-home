@@ -28,22 +28,47 @@ function setCurrentBrand(newBrand) {
 </template>
 
 <style scoped lang="scss">
+@use '../../../../common/css/mixins';
+
 .brand-list {
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: start;
 	gap: 24px;
 	list-style: none;
 	padding: 0;
 	margin: 0;
+	width: 100vw;
+	overflow-x: scroll;
+	scroll-snap-type: x mandatory;
+	padding-inline: 16px;
+
+	-ms-overflow-style: none; /* Для старых версий IE и Edge */
+	scrollbar-width: none; /* Для Firefox */
+
+	&::-webkit-scrollbar {
+		display: none; /* Скрываем скроллбар в WebKit-браузерах (Chrome, Safari, Opera) */
+	}
+
+	@include mixins.respond-up(lg) {
+		justify-content: center;
+	}
 }
 
 li {
+	scroll-snap-align: start;
 	padding: 16px;
 	cursor: pointer;
 	display: flex;
+	flex: 1;
 	align-items: center;
 	justify-content: center;
+	min-width: 100px;
+
+	@include mixins.respond-up(lg) {
+		min-width: unset;
+		flex: unset;
+	}
 
 	img {
 		width: 80% !important;
