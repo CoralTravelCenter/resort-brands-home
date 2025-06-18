@@ -7,6 +7,12 @@ import {SEARCH_DEPTH} from "../../data";
 const isLoading = inject("isLoading");
 const serverData = inject('hotelsData')
 const currentCountry = inject("currentCountry");
+
+function handleClick(hotelName) {
+	ym(96674199,'reachGoal','booking', {
+		hotel: hotelName
+	})
+}
 </script>
 
 <template>
@@ -59,6 +65,7 @@ const currentCountry = inject("currentCountry");
 							 :data-onlyhotel-lookup-destination="currentCountry"
 							 :data-onlyhotel-lookup-regions="slide.name"
 							 :data-onlyhotel-lookup-depth-days="SEARCH_DEPTH"
+							 @click="handleClick(slide.name)"
 						>
 							Забронировать
 						</a>

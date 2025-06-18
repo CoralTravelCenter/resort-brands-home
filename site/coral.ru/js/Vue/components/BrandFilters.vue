@@ -6,6 +6,9 @@ const currentBrand = inject('currentBrand')
 
 function setCurrentBrand(newBrand) {
 	currentBrand.value = newBrand
+	ym(96674199,'reachGoal','filter_by_hotel', {
+		hotel: currentBrand.value
+	})
 }
 
 const scrollClass = computed(() => {

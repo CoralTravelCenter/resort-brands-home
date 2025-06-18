@@ -17,6 +17,9 @@ const toggleDropdown = () => {
 const selectOption = (option) => {
 	currentCountry.value = option
 	open.value = false
+	ym(96674199,'reachGoal','filter_by_country', {
+		country:  currentCountry.value
+	})
 }
 
 const handleClickOutside = (e) => {

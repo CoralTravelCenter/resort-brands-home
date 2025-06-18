@@ -6,6 +6,13 @@ const currentCountry = inject('currentCountry')
 const countryMap = computed(() => {
 	return COUNTRIES.flatMap(obj => Object.keys(obj))
 })
+
+function handleClick(country) {
+	currentCountry.value = country
+	ym(96674199,'reachGoal','filter_by_country', {
+		country:  currentCountry.value
+	})
+}
 </script>
 
 <template>
@@ -14,7 +21,7 @@ const countryMap = computed(() => {
 				v-for="country in countryMap"
 				:key="country"
 				:class="{ active: currentCountry === country }"
-				@click="currentCountry = country"
+				@click="handleClick(country)"
 		>
 			{{ country }}
 		</li>
