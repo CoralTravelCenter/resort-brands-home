@@ -74,15 +74,30 @@ export const COUNTRIES = [
       ],
       "RIXOS": [
         "RIXOS AL MAIRID RAS AL KHAIMAH",
-        "RIXOS BAB AL BAHR"
+        "RIXOS BAB AL BAHR",
+        "RIXOS MARINA ABU DHABI",
+        "CLUB PRIVE BY RIXOS SAADIYAT ISLAND",
+        "RIXOS PREMIUM DUBAI",
+        "RIXOS BAB AL BAHR",
+        "RIXOS AL MAIRID RAS AL KHAIMAH"
       ],
-      // "JUMEIRAH": [
-      //   "JUMEIRAH AL NASEEM DUBAI",
-      //   "JUMEIRAH AL QASR DUBAI",
-      //   "JUMEIRAH BEACH HOTEL DUBAI",
-      //   "JUMEIRAH DAR AL MASYAF",
-      //   "JUMEIRAH MINA AL SALAM DUBAI"
-      // ]
+      "Radisson Hotel Group": [
+        "RADISSON BLU RESORT FUJAIRAH"
+      ],
+      "MOVENPICK": [
+        "MOVENPICK RESORT AL MARJAN ISLAND"
+      ],
+      "Mirage Hotel Group": [
+        "MIRAGE BAB AL BAHR BEACH RESORT"
+      ],
+      "ROTANA": [
+        "THE COVE ROTANA RESORT",
+        "FUJAIRAH ROTANA RESORT & SPA"
+      ],
+      "BM Hotels": [
+        "BM BEACH RESORT",
+        "BM BEACH HOTEL"
+      ]
     }
   },
   {
@@ -99,10 +114,6 @@ export const COUNTRIES = [
 ];
 
 export const SLOGANS = [
-  // {
-  //   "name": "JUMEIRAH",
-  //   "slogan": "Проживайте каждый момент по полной"
-  // },
   {
     'name': "RIXOS",
     "slogan": 'Всё включено — всё эксклюзивно'
@@ -143,10 +154,30 @@ export const SLOGANS = [
     "name": "TITANIC HOTELS & RESORTS",
     "slogan": "Комфорт вашего дома"
   },
+  {
+    "name": "Radisson Hotel Group",
+    "slogan": "Почувствуйте себя знаменитостью"
+  },
+  {
+    "name": "MOVENPICK",
+    "slogan": "Где каждое мгновение создано для того, чтобы им наслаждались"
+  },
+  {
+    "name": "Mirage Hotel Group",
+    "slogan": "Откройте для себя уникальный опыт путешествия"
+  },
+  {
+    "name": "ROTANA",
+    "slogan": "Когда детали имеют значение"
+  },
+  {
+    "name": "BM Hotels",
+    "slogan": "Отдых на, продуманный до мгновений"
+  }
 ];
 
 export const DEFAULT_COUNTRY = 'Турция'
 
 export const CURRENT_BRAND = 'GLORIA HOTELS'
 
-export const SEARCH_DEPTH = 21
+export const SEARCH_DEPTH = 30

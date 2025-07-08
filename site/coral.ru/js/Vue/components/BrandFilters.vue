@@ -6,7 +6,7 @@ const currentBrand = inject('currentBrand')
 
 function setCurrentBrand(newBrand) {
 	currentBrand.value = newBrand
-	ym(96674199,'reachGoal','filter_by_hotel', {
+	ym(96674199, 'reachGoal', 'filter_by_hotel', {
 		hotel: currentBrand.value
 	})
 }
@@ -94,6 +94,7 @@ li {
 	align-items: center;
 	justify-content: center;
 	min-width: 100px;
+	cursor: pointer;
 
 	@include mixins.respond-up(lg) {
 		min-width: unset;
@@ -103,6 +104,7 @@ li {
 	img {
 		width: 50% !important;
 		object-fit: contain !important;
+		max-width: 90px;
 	}
 }
 
