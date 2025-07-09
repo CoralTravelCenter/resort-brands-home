@@ -1,4 +1,4 @@
-export const COUNTRIES = [
+window.COUNTRIES = [
   {
     "Турция": {
       "GLORIA HOTELS": [
@@ -113,7 +113,7 @@ export const COUNTRIES = [
   }
 ];
 
-export const SLOGANS = [
+window.SLOGANS = [
   {
     'name': "RIXOS",
     "slogan": 'Всё включено — всё эксклюзивно'
@@ -176,8 +176,10 @@ export const SLOGANS = [
   }
 ];
 
-export const DEFAULT_COUNTRY = 'Турция'
+window.DEFAULT_COUNTRY = 'Турция'
 
-export const CURRENT_BRAND = 'GLORIA HOTELS'
+window.CURRENT_BRAND = 'GLORIA HOTELS'
 
-export const SEARCH_DEPTH = 30
+window.SEARCH_DEPTH = 14
+
+window.DEFAULT_NIGHTS = 7

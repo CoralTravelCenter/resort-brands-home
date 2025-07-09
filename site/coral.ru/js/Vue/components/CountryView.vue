@@ -1,11 +1,10 @@
 <script setup>
 import {computed, inject} from "vue";
 import HotelsSlider from "./HotelsSlider.vue";
-import {SLOGANS} from "../../data";
 
 const currentBrand = inject('currentBrand')
 const currentSlogan = computed(() => {
-	return SLOGANS.find(obj => obj.name === currentBrand.value)
+	return window.SLOGANS.find(obj => obj.name === currentBrand.value)
 })
 const currentBrandUppercased = computed(() => currentBrand.value.toUpperCase())
 </script>

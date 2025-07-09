@@ -1,10 +1,9 @@
 <script setup>
 import {computed, inject} from "vue";
-import {COUNTRIES} from "../../data";
 
 const currentCountry = inject('currentCountry')
 const countryMap = computed(() => {
-	return COUNTRIES.flatMap(obj => Object.keys(obj))
+	return window.COUNTRIES.flatMap(obj => Object.keys(obj))
 })
 
 function handleClick(country) {

@@ -3,7 +3,6 @@ import {computed, onMounted, provide, ref, watch, watchEffect} from 'vue'
 import CountryTabs from '../Vue/components/CountryTabs.vue'
 import CountryView from "./components/CountryView.vue";
 import BrandFilters from "./components/BrandFilters.vue";
-import {COUNTRIES, CURRENT_BRAND, DEFAULT_COUNTRY} from "../data";
 import {fetchHotelsData} from "./utils/fetchHotelsData";
 import CountrySelect from "./components/CountrySelect.vue";
 import {useMediaQuery} from "@vueuse/core";
@@ -14,15 +13,15 @@ const locationStorageKey = computed(() => `locations_data_${currentCountry.value
 const hotelsStorageKey = computed(() => `hotels_data_${currentCountry.value}_${currentBrand.value}`)
 const isLargeScreen = useMediaQuery('(min-width: 1280px)')
 
-const currentCountry = ref(DEFAULT_COUNTRY);
+const currentCountry = ref(window.DEFAULT_COUNTRY);
 const currentBrands = computed(() => {
-	if (COUNTRIES) {
-		return getBrandsByCountry(COUNTRIES, currentCountry);
+	if (window.COUNTRIES) {
+		return getBrandsByCountry(window.COUNTRIES, currentCountry);
 	}
 });
-const currentBrand = ref(CURRENT_BRAND)
+const currentBrand = ref(window.CURRENT_BRAND)
 const currentHotels = computed(() => {
-	return getHotelsByCountryAndBrand(COUNTRIES, currentCountry, currentBrand)
+	return getHotelsByCountryAndBrand(window.COUNTRIES, currentCountry, currentBrand)
 })
 provide('currentCountry', currentCountry)
 provide('currentBrand', currentBrand)

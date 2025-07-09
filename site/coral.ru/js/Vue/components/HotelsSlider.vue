@@ -2,7 +2,6 @@
 import {inject} from "vue";
 import {priceCalculation} from "../utils/priceCalculation";
 import SliderSkeletor from "./SliderSkeletor.vue";
-import {SEARCH_DEPTH} from "../../data";
 
 const isLoading = inject("isLoading");
 const serverData = inject('hotelsData')
@@ -24,7 +23,7 @@ function handleClick(hotelName) {
 				:space-between="24"
 				:loop="true"
 				:navigation="{
-					nextEl: '.slider-bnt-next'
+					nextEl: '.brand-slider-next'
 				}"
 				:breakpoints="{
 					1280: {
@@ -62,9 +61,9 @@ function handleClick(hotelName) {
 					<div class="hotel-price">
 						<span>от {{ priceCalculation(slide.price) }}</span>
 						<a href="#" class="prime-btn custom"
-							 :data-onlyhotel-lookup-destination="currentCountry"
-							 :data-onlyhotel-lookup-regions="slide.name"
-							 :data-onlyhotel-lookup-depth-days="SEARCH_DEPTH"
+							 :data-onlyhotel-lookup-destination="slide.name"
+							 :data-onlyhotel-lookup-depth-days="14"
+							 :data-onlyhotel-lookup-depth-nights="7"
 							 @click="handleClick(slide.name)"
 						>
 							Забронировать
@@ -75,7 +74,7 @@ function handleClick(hotelName) {
 				</div>
 			</swiper-slide>
 		</swiper-container>
-		<button class="custom-slider-nav-btn slider-bnt-next">
+		<button class="custom-slider-nav-btn brand-slider-next">
 			<svg fill="none" height="9" viewBox="0 0 6 9" width="6" xmlns="http://www.w3.org/2000/svg">
 				<path d="M1.25 1.16504L4.58333 4.49837L1.25 7.83171" stroke="#535353" stroke-linejoin="round"></path>
 			</svg>
@@ -85,6 +84,10 @@ function handleClick(hotelName) {
 
 <style scoped lang="scss">
 @use '../../../../common/css/mixins';
+
+.brand-slider-next {
+right: 16px;
+}
 
 .slider-bnt-prev {
 	left: 16px;

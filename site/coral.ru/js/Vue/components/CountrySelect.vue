@@ -1,10 +1,9 @@
 <script setup>
 import {computed, inject, onBeforeUnmount, onMounted, ref} from 'vue'
-import {COUNTRIES} from "../../data"
 
 const currentCountry = inject('currentCountry')
 const options = computed(() => {
-	return COUNTRIES.flatMap(obj => Object.keys(obj))
+	return window.COUNTRIES.flatMap(obj => Object.keys(obj))
 })
 
 const open = ref(false)
