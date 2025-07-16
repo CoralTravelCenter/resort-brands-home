@@ -6,40 +6,41 @@ export async function getHotelData(arrivalLocationsArr) {
   try {
     const beginSearchDate = addDays(window.SEARCH_DEPTH)
     const lookupNights = 7
-    const response = await doRequestToServer(endpointUrl(HOTEL_PRICE_API),
-      {
-        searchCriterias: {
-          reservationType: 2,
-          beginDates: [beginSearchDate],
-          nights: [
-            {
-              value: lookupNights,
-            },
-          ],
-          imageSizes: [4],
-          roomCriterias: [
-            {
-              passengers: [
-                {
-                  passengerType: 0,
-                  age: 20,
-                },
-                {
-                  passengerType: 0,
-                  age: 20,
-                },
-              ],
-            },
-          ],
-          arrivalLocations: arrivalLocationsArr.value,
-          paging: {
-            pageNumber: 1,
-            pageSize: arrivalLocationsArr.value.length,
-            sortType: 0,
+    const payload = {
+      searchCriterias: {
+        reservationType: 2,
+        beginDates: [beginSearchDate],
+        nights: [
+          {
+            value: lookupNights,
           },
-        }
-      },
-    )
+        ],
+        imageSizes: [4],
+        roomCriterias: [
+          {
+            passengers: [
+              {
+                passengerType: 0,
+                age: 20,
+              },
+              {
+                passengerType: 0,
+                age: 20,
+              },
+            ],
+          },
+        ],
+        arrivalLocations: arrivalLocationsArr.value,
+        paging: {
+          pageNumber: 1,
+          pageSize: 100,
+          sortType: 0,
+        },
+      }
+    }
+
+    const response = await doRequestToServer(endpointUrl(HOTEL_PRICE_API), payload)
+    console.log(response)
     const hotelCategories = response?.result?.hotelCategories ?? {}
     const products = response?.result?.products ?? [];
     return products.map(obj => {

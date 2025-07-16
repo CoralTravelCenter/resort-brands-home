@@ -1,5 +1,5 @@
 <script setup>
-import {computed, onMounted, provide, ref, watch, watchEffect} from 'vue'
+import {computed, onMounted, provide, ref, watch} from 'vue'
 import CountryTabs from '../Vue/components/CountryTabs.vue'
 import CountryView from "./components/CountryView.vue";
 import BrandFilters from "./components/BrandFilters.vue";
@@ -40,20 +40,32 @@ onMounted(() => {
 			currentHotels,
 			isLoading,
 			hotelsData
-	)
-})
-watch(currentCountry, () => {
-	currentBrand.value = currentBrands.value[0]
-});
-watchEffect(() => {
-	fetchHotelsData(
-			locationStorageKey,
-			hotelsStorageKey,
-			currentHotels,
-			isLoading,
-			hotelsData
 	);
 })
+
+
+//Отдельно следим за сменой страны и меняем бренд
+watch(currentCountry, (newCountry, oldCountry) => {
+	const firstBrand = currentBrands.value[0]
+	if (currentBrand.value !== firstBrand) {
+		console.log(`Страна изменилась с ${oldCountry} на ${newCountry}, устанавливаем бренд: ${firstBrand}`)
+		currentBrand.value = firstBrand
+	}
+})
+
+//Следим за любыми изменениями страны, бренда или списка отелей и загружаем данные
+watch(
+		() => [currentCountry.value, currentBrand.value, currentHotels.value],
+		() => {
+			fetchHotelsData(
+					locationStorageKey,
+					hotelsStorageKey,
+					currentHotels,
+					isLoading,
+					hotelsData
+			)
+		}
+)
 </script>
 
 <template>

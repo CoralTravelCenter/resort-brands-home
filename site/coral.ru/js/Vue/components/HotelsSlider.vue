@@ -23,7 +23,8 @@ function handleClick(hotelName) {
 				:space-between="24"
 				:loop="true"
 				:navigation="{
-					nextEl: '.brand-slider-next'
+				nextEl: '.brandus-slider-bnt-next'
+
 				}"
 				:breakpoints="{
 					1280: {
@@ -74,7 +75,8 @@ function handleClick(hotelName) {
 				</div>
 			</swiper-slide>
 		</swiper-container>
-		<button class="custom-slider-nav-btn brand-slider-next">
+
+		<button class="custom-slider-nav-btn brandus-slider-bnt-next">
 			<svg fill="none" height="9" viewBox="0 0 6 9" width="6" xmlns="http://www.w3.org/2000/svg">
 				<path d="M1.25 1.16504L4.58333 4.49837L1.25 7.83171" stroke="#535353" stroke-linejoin="round"></path>
 			</svg>
@@ -93,7 +95,7 @@ right: 16px;
 	left: 16px;
 }
 
-.slider-bnt-next {
+.brandus-slider-bnt-next {
 	right: 16px;
 
 	@media (max-width: 768px) {
@@ -101,8 +103,7 @@ right: 16px;
 	}
 }
 
-.slider-bnt-next.swiper-button-disabled,
-.slider-bnt-prev.swiper-button-disabled {
+.brandus-slider-bnt-next.swiper-button-disabled {
 	display: none;
 }
 

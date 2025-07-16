@@ -21,12 +21,10 @@ export async function fetchHotelsData(locationStorageKey, hotelsStorageKey, curr
       locationResponses.value = await getArrivalLocation(currentHotels);
     }
 
-    // **Получаем данные об отелях (если нет в sessionStorage)**
     if (!hotelsResponses.value) {
       hotelsResponses.value = await getHotelData(locationResponses);
     }
 
-    // **Сохраняем загруженные данные**
     hotelsData.value = hotelsResponses.value;
   } catch (error) {
     console.error("Ошибка получения данных отелей:", error);
