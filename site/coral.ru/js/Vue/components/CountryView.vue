@@ -1,7 +1,8 @@
 <script setup>
 import {computed, inject} from "vue";
 import HotelsSlider from "./HotelsSlider.vue";
-import {SLOGANS} from "../../data";
+
+const SLOGANS = window.SLOGANS;
 
 const currentBrand = inject('currentBrand')
 const currentSlogan = computed(() => {
@@ -58,7 +59,6 @@ h3 {
 }
 
 span {
-	margin-bottom: 48px;
 	color: rgba(255, 255, 255, 0.85);
 }
 </style>

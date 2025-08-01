@@ -1,6 +1,7 @@
 <script setup>
 import {computed, inject} from "vue";
-import {COUNTRIES} from "../../data";
+
+const COUNTRIES = window.COUNTRIES
 
 const currentCountry = inject('currentCountry')
 const countryMap = computed(() => {
@@ -9,8 +10,8 @@ const countryMap = computed(() => {
 
 function handleClick(country) {
 	currentCountry.value = country
-	ym(96674199,'reachGoal','filter_by_country', {
-		country:  currentCountry.value
+	ym(96674199, 'reachGoal', 'filter_by_country', {
+		country: currentCountry.value
 	})
 }
 </script>
