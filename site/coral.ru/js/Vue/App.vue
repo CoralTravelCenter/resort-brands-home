@@ -1,5 +1,5 @@
 <script setup>
-import {computed, onMounted, provide, ref, watch, watchEffect} from 'vue'
+import {computed, onMounted, provide, ref, watch} from 'vue'
 import CountryTabs from '../Vue/components/CountryTabs.vue'
 import CountryView from "./components/CountryView.vue";
 import BrandFilters from "./components/BrandFilters.vue";
@@ -17,15 +17,15 @@ const locationStorageKey = computed(() => `locations_data_${currentCountry.value
 const hotelsStorageKey = computed(() => `hotels_data_${currentCountry.value}_${currentBrand.value}`)
 const isLargeScreen = useMediaQuery('(min-width: 1280px)')
 
-const currentCountry = ref(DEFAULT_COUNTRY);
+const currentCountry = ref(window.DEFAULT_COUNTRY);
 const currentBrands = computed(() => {
-	if (COUNTRIES) {
-		return getBrandsByCountry(COUNTRIES, currentCountry);
+	if (window.COUNTRIES) {
+		return getBrandsByCountry(window.COUNTRIES, currentCountry);
 	}
 });
-const currentBrand = ref(CURRENT_BRAND)
+const currentBrand = ref(window.CURRENT_BRAND)
 const currentHotels = computed(() => {
-	return getHotelsByCountryAndBrand(COUNTRIES, currentCountry, currentBrand)
+	return getHotelsByCountryAndBrand(window.COUNTRIES, currentCountry, currentBrand)
 })
 
 provide('currentCountry', currentCountry)
@@ -45,20 +45,32 @@ onMounted(() => {
 			currentHotels,
 			isLoading,
 			hotelsData
-	)
-})
-watch(currentCountry, () => {
-	currentBrand.value = currentBrands.value[0]
-});
-watchEffect(() => {
-	fetchHotelsData(
-			locationStorageKey,
-			hotelsStorageKey,
-			currentHotels,
-			isLoading,
-			hotelsData
 	);
 })
+
+
+//Отдельно следим за сменой страны и меняем бренд
+watch(currentCountry, (newCountry, oldCountry) => {
+	const firstBrand = currentBrands.value[0]
+	if (currentBrand.value !== firstBrand) {
+		console.log(`Страна изменилась с ${oldCountry} на ${newCountry}, устанавливаем бренд: ${firstBrand}`)
+		currentBrand.value = firstBrand
+	}
+})
+
+//Следим за любыми изменениями страны, бренда или списка отелей и загружаем данные
+watch(
+		() => [currentCountry.value, currentBrand.value, currentHotels.value],
+		() => {
+			fetchHotelsData(
+					locationStorageKey,
+					hotelsStorageKey,
+					currentHotels,
+					isLoading,
+					hotelsData
+			)
+		}
+)
 </script>
 
 <template>

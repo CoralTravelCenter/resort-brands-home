@@ -24,8 +24,16 @@ export async function getArrivalLocation(hotels) {
         );
       });
 
+// Удаляем дубликаты по id
+    const uniqueHotelsCollection = new Set();
+    const sortedUniqueHotels = filteredHotels.filter(hotel => {
+      if (uniqueHotelsCollection.has(hotel.id)) return false;
+      uniqueHotelsCollection.add(hotel.id);
+      return true;
+    });
+
     // Возвращаем только нужные данные
-    return filteredHotels.map(hotel => {
+    return sortedUniqueHotels.map(hotel => {
       const correctLocation = hotel;
       return correctLocation
         ? {
