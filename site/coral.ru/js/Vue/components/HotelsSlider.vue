@@ -30,7 +30,7 @@ function handleClick(hotelName) {
 				:slides-per-view="1.2"
 				:space-between="24"
 				:loop="true"
-				:navigation="{ nextEl: '.slider-bnt-next' }"
+				:navigation="{ nextEl: '.brandus-bnt-next' }"
 				:breakpoints="{
 				1280: { slidesPerView: 2 },
 				1440: { slidesPerView: 2.3 }
@@ -76,7 +76,7 @@ function handleClick(hotelName) {
 				</div>
 			</swiper-slide>
 		</swiper-container>
-		<button class="custom-slider-nav-btn slider-bnt-next">
+		<button class="custom-slider-nav-btn brandus-bnt-next">
 			<svg fill="none" height="9" viewBox="0 0 6 9" width="6" xmlns="http://www.w3.org/2000/svg">
 				<path d="M1.25 1.16504L4.58333 4.49837L1.25 7.83171" stroke="#535353" stroke-linejoin="round"/>
 			</svg>
@@ -107,7 +107,7 @@ function handleClick(hotelName) {
 	gap: 16px;
 }
 
-.slider-bnt-prev {
+.brandus-bnt-next {
 	left: 16px;
 }
 
