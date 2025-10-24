@@ -1,122 +1,97 @@
+window.DEFAULTS = {
+  country: 'Турция',
+  currentBrand: 'RIXOS'
+}
+
 window.COUNTRIES = [
   {
-    "Турция": {
-      "GLORIA HOTELS": [
-        "GLORIA GOLF RESORT",
-        "GLORIA SERENITY RESORT",
-        "GLORIA VERDE RESORT"
-      ],
-      "RIXOS": [
-        "CLUB PRIVE BY RIXOS BELEK",
-        "RIXOS DOWNTOWN ANTALYA - THE LAND OF LEGENDS FREE ACCESS",
-        "RIXOS PARK BELEK - THE LAND OF LEGENDS FREE ACCESS",
-        "RIXOS PREMIUM BELEK - THE LAND OF LEGENDS FREE ACCESS",
-        "RIXOS PREMIUM TEKIROVA - THE LAND OF LEGENDS FREE ACCESS",
-        "RIXOS SUNGATE - THE LAND OF LEGENDS FREE ACCESS",
-        "CLUB PRIVE BY RIXOS GOCEK",
-        "THE LAND OF LEGENDS - KINGDOM HOTEL",
-        "THE LAND OF LEGENDS NICKELODEON HOTEL & RESORT"
-      ],
-      "LIBERTY HOTELS": [
-        "LIBERTY FABAY",
-        "LIBERTY HOTELS LYKIA",
-        "LIBERTY HOTELS LYKIA ADULT ONLY",
-        "LIBERTY SIGNA"
-      ],
-      "MAXX ROYAL": [
-        "MAXX ROYAL BELEK GOLF RESORT",
-        "MAXX ROYAL KEMER RESORT"
-      ],
-      "VOYAGE HOTELS": [
-        "VOYAGE BELEK GOLF & SPA",
-        "VOYAGE SORGUN"
-      ],
-    }
-  },
-  {
-    "Египет": {
-      "PICKALBATROS HOTELS & RESORTS": [
-        "PICKALBATROS AQUA BLU RESORT-SSH",
-        "PICKALBATROS AQUA PARK RESORT",
-        "PICKALBATROS CITADEL RESORT SAHL HASHEESH",
-        "PICKALBATROS DANA BEACH RESORT",
-        "PICKALBATROS JUNGLE AQUA PARK RESORT - NEVERLAND HURGHADA",
-        "PICKALBATROS LAGUNA VISTA HOTEL-SSH"
-      ],
-      "RIXOS": [
-        "RIXOS PREMIUM MAGAWISH",
-        "CLUB PRIVÉ BY RIXOS SHARM EL SHEIKH",
-        "RIXOS PREMIUM SEAGATE",
-        "RIXOS RADAMIS SHARM El SHEIKH",
-        "RIXOS SHARM EL SHEIKH"
-      ],
-      "SUNRISE HOTELS & RESORTS": [
-        "SUNRISE GRAND SELECT ARABIAN BEACH RESORT",
-        "SUNRISE GRAND SELECT DIAMOND BEACH RESORT",
-        "SUNRISE GRAND SELECT MONTEMARE RESORT",
-        "SUNRISE HOLIDAYS RESORT",
-        "SUNRISE REMAL RESORT"
-      ],
-      "TITANIC HOTELS & RESORTS": [
-        "TITANIC BEACH SPA & AQUA PARK",
-        "TITANIC PALACE & AQUA PARK BEACH RESORT",
-        "TITANIC RESORT & AQUA PARK",
-        "TITANIC ROYAL"
-      ],
-    }
-  },
-  {
-    "ОАЭ": {
-      "FAIRMONT HOTELS & RESORTS": [
-        "FAIRMONT AJMAN",
-        "FAIRMONT FUJAIRAH",
-        "FAIRMONT THE PALM"
-      ],
-      "RIXOS": [
-        "RIXOS AL MAIRID RAS AL KHAIMAH",
-        "RIXOS BAB AL BAHR",
-        "RIXOS MARINA ABU DHABI",
-        "CLUB PRIVE BY RIXOS SAADIYAT ISLAND",
-        "RIXOS PREMIUM DUBAI",
-        "RIXOS BAB AL BAHR",
-        "RIXOS AL MAIRID RAS AL KHAIMAH"
-      ],
-      "Radisson Hotel Group": [
-        "RADISSON BLU RESORT FUJAIRAH"
-      ],
-      "MOVENPICK": [
-        "MOVENPICK RESORT AL MARJAN ISLAND"
-      ],
-      "Mirage Hotel Group": [
-        "MIRAGE BAB AL BAHR BEACH RESORT"
-      ],
-      "ROTANA": [
-        "THE COVE ROTANA RESORT",
-        "FUJAIRAH ROTANA RESORT & SPA"
-      ],
-      "BM Hotels": [
-        "BM BEACH RESORT",
-        "BM BEACH HOTEL"
-      ]
-    }
-  },
-  {
-    "Вьетнам": {
-      "VINPEARL HOTELS & RESORTS": [
-        "VINPEARL LUXURY NHA TRANG",
-        "VINPEARL RESORT & SPA NHA TRANG BAY",
-        "VINPEARL RESORT & SPA PHU QUOC",
-        "VINPEARL RESORT NHA TRANG",
-        "VINPEARL WONDERWORLD PHU QUOC"
-      ]
-    }
+    "Турция": [
+      {
+        "RIXOS": {
+          searchDepth: 20,
+          searchNights: 7,
+          hotels: [
+            "CLUB PRIVE BY RIXOS BELEK",
+            "RIXOS DOWNTOWN ANTALYA - THE LAND OF LEGENDS FREE ACCESS",
+            "RIXOS PARK BELEK - THE LAND OF LEGENDS FREE ACCESS",
+            "RIXOS PREMIUM BELEK - THE LAND OF LEGENDS FREE ACCESS",
+            "RIXOS PREMIUM TEKIROVA - THE LAND OF LEGENDS FREE ACCESS"
+          ]
+        },
+      },
+      {
+        "PALOMA HOTELS": {
+          searchDepth: 20,
+          searchNights: 7,
+          hotels: [
+            "PALOMA FINESSE",
+            "PALOMA GRIDA",
+            "PALOMA MARINA SUITES",
+            "PALOMA OCEANA",
+            "PALOMA ORENDA"
+          ]
+        }
+      },
+      {
+        "LIBERTY HOTELS": {
+          searchDepth: 20,
+          searchNights: 7,
+          hotels: [
+            "LIBERTY FABAY ",
+            "LIBERTY HOTELS LYKIA ADULT ONLY",
+            "LIBERTY HOTELS LYKIA ",
+            "LIBERTY SIGNA",
+            "SUNDIA BY LIBERTY OLUDENIZ"
+          ]
+        }
+      },
+      {
+        "CRYSTAL HOTELS": {
+          searchDepth: 20,
+          searchNights: 7,
+          hotels: [
+            "CRYSTAL ADMIRAL RESORT SUITES&SPA",
+            "CRYSTAL AURA BEACH RESORT & SPA",
+            "CRYSTAL BOUTIQUE BEACH RESORT",
+            "CRYSTAL CENTRO (EX. AMARA CENTRO RESORT)",
+            "CRYSTAL CLUB WORLD OF COLOURS RESORT & SPA"
+          ]
+        }
+      },
+      {
+        "CORAL TRAVEL GROUP": {
+          searchDepth: 20,
+          searchNights: 7,
+          hotels: [
+            "XANADU RESORT",
+            "SEVEN SEAS HOTEL LIFE",
+            "SEVEN SEAS PALMERAS BAY",
+            "MARVIDA FAMILY ECO (Ex. OTIUM FAMILY ECO CLUB) ",
+            "MARVIDA HOTEL HAPPY SUITES"
+          ]
+        }
+      },
+      {
+        "ARMAS HOTELS": {
+          searchDepth: 20,
+          searchNights: 7,
+          hotels: [
+            "ARMAS BEACH",
+            "ARMAS BELLA SUN",
+            "ARMAS GREEN FUGLA BEACH",
+            "ARMAS GUL BEACH HOTEL",
+            "ARMAS KAPLAN PARADISE"
+          ]
+        }
+      }
+    ]
   }
-];
+]
 
 window.SLOGANS = [
   {
-    'name': "RIXOS",
-    "slogan": 'Всё включено — всё эксклюзивно'
+    "name": "RIXOS",
+    "slogan": "Всё включено — всё эксклюзивно"
   },
   {
     "name": "FAIRMONT HOTELS & RESORTS",
@@ -171,15 +146,143 @@ window.SLOGANS = [
     "slogan": "Когда детали имеют значение"
   },
   {
-    "name": "BM Hotels",
-    "slogan": "Отдых на, продуманный до мгновений"
+    "name": "BM Hotels & Resorts",
+    "slogan": "Отдых, продуманный до мгновений"
+  },
+  {
+    "name": "Hmhhotelgroup",
+    "slogan": "Лакшери отдых у Персидского залива"
+  },
+  {
+    "name": "Hilton",
+    "slogan": "Насладитесь знаменитым сервисом Hilton Hotels & Resorts"
+  },
+  {
+    "name": "InterContinental Hotels & Resorts",
+    "slogan": "Отели, где отдых продуман до мгновений"
+  },
+  {
+    "name": "Barcelo Hotel Group",
+    "slogan": "Отели для незабываемых впечатлений"
+  },
+  {
+    "name": "WYNDHAM",
+    "slogan": "Исключительный пляжный отдых на Персидском заливе"
+  },
+  {
+    "name": "Coral group hotels",
+    "slogan": "Отдых, проверенный временем"
+  },
+  {
+    "name": "Royal Star",
+    "slogan": "Релакс-отдых на Красном море"
+  },
+  {
+    "name": "MP Hotels",
+    "slogan": "Где каждая деталь создана для вас"
+  },
+  {
+    "name": "Jaz Group",
+    "slogan": "Отдыхайте и ни о чем не думайте"
+  },
+  {
+    "name": "THE ANAM",
+    "slogan": "Уникальный отдых во Вьетнаме"
+  },
+  {
+    "name": "Marriott",
+    "slogan": "Отели, которые вдохновляют на отдых"
+  },
+  {
+    "name": "Best Western Hotels & Resort",
+    "slogan": "Испытайте гостеприимство мирового уровня "
+  },
+  {
+    "name": "HotelLinkSolution",
+    "slogan": "Отдыхайте с удовольствием"
+  },
+  {
+    "name": "AKKA HOTELS",
+    "slogan": "Уникальный отдых ждет вас"
+  },
+  {
+    "name": "DOBEDAN HOTELS",
+    "slogan": "Уникальный эксклюзивный"
+  },
+  {
+    "name": "TUI",
+    "slogan": "Бюджетный отдых высокого класса"
+  },
+  {
+    "name": "GREEN NATURE HOTELS ",
+    "slogan": "Отдохните в объятиях природы Мармариса"
+  },
+  {
+    "name": "ALBA HOTELS",
+    "slogan": "Насладитесь великолепным сервисом"
+  },
+  {
+    "name": "CRYSTAL HOTELS",
+    "slogan": "Баланс комфорта и развлечений"
+  },
+  {
+    "name": "LIMAK HOTELS",
+    "slogan": "Созданы для семейного отдыха"
+  },
+  {
+    "name": "PALOMA HOTELS",
+    "slogan": "Безграничный отдых для всех"
+  },
+  {
+    "name": "STONE GROUP",
+    "slogan": "Гарантия высококлассного сервиса"
+  },
+  {
+    "name": "ALI BEY HOTELS",
+    "slogan": "Отдых, который надо ощутить"
+  },
+  {
+    "name": "ARMAS HOTELS",
+    "slogan": "Наслаждайтесь моментом"
+  },
+  {
+    "name": "Coral Sea Hotels - resorts - Nile Cruises",
+    "slogan": "Египетское гостеприимство на Красном море"
+  },
+  {
+    "name": "Accor",
+    "slogan": "Где каждый день отдыха – восторг"
+  },
+  {
+    "name": "Concorde Hotels & Resorts Egypt",
+    "slogan": "Пятерка, в которую хочется вернуться"
+  },
+  {
+    "name": "Mirage Hotel Groups",
+    "slogan": "Отдых и развлечения нон-стоп"
+  },
+  {
+    "name": "Movenpick Hotels & Resorts",
+    "slogan": "Оптимальное сочетание комфорта и качества"
+  },
+  {
+    "name": "NUBIAN",
+    "slogan": "Аутентичный отель в заливе Набк"
+  },
+  {
+    "name": "Azur Hotels",
+    "slogan": "Красивый и комфортный отдых на Красном море"
+  },
+  {
+    "name": "KAYA HOTELS & RESORTS",
+    "slogan": "Отдых мечты на Средиземноморье "
+  },
+  {
+    "name": "NIRVANA HOTELS",
+    "slogan": "Откройте для себя великолепие нирваны"
+  },
+  {
+    "name": "CORAL TRAVEL GROUP",
+    "slogan": "Где каждая деталь – часть вашего идеального отдыха"
   }
-];
-
-window.DEFAULT_COUNTRY = 'Турция'
-
-window.CURRENT_BRAND = 'GLORIA HOTELS'
-
-window.SEARCH_DEPTH = 14
-
-window.DEFAULT_NIGHTS = 7
+]

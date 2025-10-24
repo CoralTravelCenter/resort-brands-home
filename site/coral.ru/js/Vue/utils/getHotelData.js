@@ -40,7 +40,6 @@ export async function getHotelData(arrivalLocationsArr) {
     }
 
     const response = await doRequestToServer(endpointUrl(HOTEL_PRICE_API), payload)
-    console.log(response)
     const hotelCategories = response?.result?.hotelCategories ?? {}
     const products = response?.result?.products ?? [];
     return products.map(obj => {

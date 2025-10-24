@@ -1,5 +1,6 @@
 export function getBrandsByCountry(data, countryName) {
-  const currentCountryData = data.find(obj => Object.keys(obj)[0] === countryName.value);
+  const currentCountryData = data.filter(item => Object.hasOwnProperty(item) === countryName.value);
+  console.log(currentCountryData)
   if (currentCountryData) {
     const currentCountryBrands = Object.values(currentCountryData)[0]
     const currentCountryBrandsArr = []

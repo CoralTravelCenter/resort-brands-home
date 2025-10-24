@@ -21,10 +21,9 @@ function handleClick(hotelName) {
 				v-else
 				:slides-per-view="1.2"
 				:space-between="24"
-				:loop="true"
 				:navigation="{
-				nextEl: '.brandus-slider-bnt-next'
-
+					nextEl: '.brandus-slider-bnt-next',
+					prevEl: '.brandus-slider-bnt-prev'
 				}"
 				:breakpoints="{
 					1280: {
