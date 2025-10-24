@@ -9,41 +9,24 @@ import {useMediaQuery} from "@vueuse/core";
 import {getBrandsByCountry} from "./utils/getBrandsByCountry";
 import {getHotelsByCountryAndBrand} from "./utils/getHotelsByCountryAndBrand";
 
+const COUNTRIES = window.COUNTRIES
+const CURRENT_BRAND = window.CURRENT_BRAND
+const DEFAULT_COUNTRY = window.DEFAULT_COUNTRY
+
 const locationStorageKey = computed(() => `locations_data_${currentCountry.value}_${currentBrand.value}`)
 const hotelsStorageKey = computed(() => `hotels_data_${currentCountry.value}_${currentBrand.value}`)
 const isLargeScreen = useMediaQuery('(min-width: 1280px)')
 
-// Текущая страна
-const currentCountry = ref(DEFAULTS.country);
-
-// Массив стран
-const getCountries = computed(() => {
-	const countryNames = [];
-	for (const countryObject of window.COUNTRIES) {
-		const countryName = Object.keys(countryObject)[0];
-		if (countryName) countryNames.push(countryName.trim());
+const currentCountry = ref(window.DEFAULT_COUNTRY);
+const currentBrands = computed(() => {
+	if (window.COUNTRIES) {
+		return getBrandsByCountry(window.COUNTRIES, currentCountry);
 	}
-	return countryNames;
 });
-
-console.log(getCountries.value);
-
-// Массив отельных брендов текущей страны
-const getBrandsByCountrydd = computed(() => {
-	const countryData = window.COUNTRIES.find(obj => obj.hasOwnProperty(currentCountry.value));
-	const hotelBrandNames = [];
-	const brands = countryData[currentCountry.value]; // Get the array of brands for the country
-
-	for (const brandObject of brands) {
-		hotelBrandNames.push(Object.keys(brandObject)[0]); // Extract the brand name
-	}
-
-	return hotelBrandNames;
-});
-// const currentBrand = ref(window.CURRENT_BRAND)
-// const currentHotels = computed(() => {
-// 	return getHotelsByCountryAndBrand(window.COUNTRIES, currentCountry, currentBrand)
-// })
+const currentBrand = ref(window.CURRENT_BRAND)
+const currentHotels = computed(() => {
+	return getHotelsByCountryAndBrand(window.COUNTRIES, currentCountry, currentBrand)
+})
 
 provide('currentCountry', currentCountry)
 provide('currentBrand', currentBrand)
@@ -67,9 +50,10 @@ onMounted(() => {
 
 
 //Отдельно следим за сменой страны и меняем бренд
-watch(currentCountry, () => {
+watch(currentCountry, (newCountry, oldCountry) => {
 	const firstBrand = currentBrands.value[0]
 	if (currentBrand.value !== firstBrand) {
+		console.log(`Страна изменилась с ${oldCountry} на ${newCountry}, устанавливаем бренд: ${firstBrand}`)
 		currentBrand.value = firstBrand
 	}
 })
@@ -89,75 +73,75 @@ watch(
 )
 </script>
 
-<!--<template>-->
-<!--	<div class="app-container">-->
-<!--		<div class="headline-wrapper">-->
-<!--			<h2>Бренды, которые создают отдых</h2>-->
-<!--			<CountryTabs v-if="isLargeScreen" class="country-tabs"/>-->
-<!--			<CountrySelect class="country-select" v-else/>-->
-<!--		</div>-->
-<!--		<CountryView class="slider"/>-->
-<!--		<BrandFilters class="brands-nav"/>-->
-<!--	</div>-->
-<!--</template>-->
+<template>
+	<div class="app-container">
+		<div class="headline-wrapper">
+			<h2>Бренды, которые создают отдых</h2>
+			<CountryTabs v-if="isLargeScreen" class="country-tabs"/>
+			<CountrySelect class="country-select" v-else/>
+		</div>
+		<CountryView class="slider"/>
+		<BrandFilters class="brands-nav"/>
+	</div>
+</template>
 
-<!--<style lang="scss" scoped>-->
-<!--@use '../../../common/css/mixins';-->
+<style lang="scss" scoped>
+@use '../../../common/css/mixins';
 
-<!--.app-container {-->
-<!--	width: 100%;-->
-<!--	overflow: hidden;-->
-<!--	display: flex;-->
-<!--	flex-direction: column;-->
-<!--	gap: 16px;-->
-<!--}-->
+.app-container {
+	width: 100%;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
 
-<!--h2 {-->
-<!--	order: 1;-->
+h2 {
+	order: 1;
 
-<!--	@include mixins.respond-up(md) {-->
-<!--		width: 50%;-->
-<!--	}-->
-<!--}-->
+	@include mixins.respond-up(md) {
+		width: 50%;
+	}
+}
 
-<!--.country-select {-->
-<!--	align-self: start;-->
-<!--	order: 2;-->
+.country-select {
+	align-self: start;
+	order: 2;
 
-<!--	@include mixins.respond-up(md) {-->
-<!--		align-self: center;-->
-<!--	}-->
-<!--}-->
+	@include mixins.respond-up(md) {
+		align-self: center;
+	}
+}
 
-<!--.brands-nav {-->
-<!--	order: 3;-->
+.brands-nav {
+	order: 3;
 
-<!--	@include mixins.respond-up(lg) {-->
-<!--		order: 4;-->
-<!--	}-->
-<!--}-->
+	@include mixins.respond-up(lg) {
+		order: 4;
+	}
+}
 
-<!--.slider {-->
-<!--	order: 4;-->
+.slider {
+	order: 4;
 
-<!--	@include mixins.respond-up(lg) {-->
-<!--		order: 3;-->
-<!--	}-->
-<!--}-->
+	@include mixins.respond-up(lg) {
+		order: 3;
+	}
+}
 
-<!--.headline-wrapper {-->
-<!--	display: flex;-->
-<!--	justify-content: space-between;-->
-<!--	flex-direction: column;-->
-<!--	align-items: center;-->
-<!--	gap: 16px;-->
+.headline-wrapper {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
 
-<!--	@include mixins.respond-up(md) {-->
-<!--		flex-direction: row;-->
-<!--	}-->
+	@include mixins.respond-up(md) {
+		flex-direction: row;
+	}
 
-<!--	@include mixins.respond-up(xl) {-->
-<!--		flex-direction: row-reverse;-->
-<!--	}-->
-<!--}-->
-<!--</style>-->
+	@include mixins.respond-up(xl) {
+		flex-direction: row-reverse;
+	}
+}
+</style>

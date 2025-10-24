@@ -1,38 +1,40 @@
 <script setup>
-import {inject} from "vue";
+import {computed, inject} from "vue";
 import {priceCalculation} from "../utils/priceCalculation";
 import SliderSkeletor from "./SliderSkeletor.vue";
+
+const SEARCH_DEPTH = window.SEARCH_DEPTH;
 
 const isLoading = inject("isLoading");
 const serverData = inject('hotelsData')
 const currentCountry = inject("currentCountry");
+const hasHotels = computed(() => serverData.value?.length > 0);
 
 function handleClick(hotelName) {
-	ym(96674199,'reachGoal','booking', {
+	ym(96674199, 'reachGoal', 'booking', {
 		hotel: hotelName
 	})
 }
 </script>
 
 <template>
-	<div class="carousel-wrapper">
-		<SliderSkeletor v-if="isLoading" width="100"/>
+
+	<!-- Показываем скелетоны, пока идёт загрузка -->
+	<div v-if="isLoading" class="carousel-wrapper">
+		<SliderSkeletor width="100"/>
+	</div>
+
+	<!-- После загрузки: если есть отели — слайдер -->
+	<div v-else-if="hasHotels" class="carousel-wrapper">
 		<swiper-container
-				v-else
 				:slides-per-view="1.2"
 				:space-between="24"
-				:navigation="{
-					nextEl: '.brandus-slider-bnt-next',
-					prevEl: '.brandus-slider-bnt-prev'
-				}"
+				:loop="true"
+				:navigation="{ nextEl: '.brandus-bnt-next' }"
 				:breakpoints="{
-					1280: {
-						slidesPerView: 2,
-					},
-					1440: {
-						slidesPerView: 2.3,
-					}
-    		}"
+				1280: { slidesPerView: 2 },
+				1440: { slidesPerView: 2.3 }
+			}"
 		>
 			<swiper-slide v-for="slide in serverData" :key="slide.name">
 				<div class="visual">
@@ -61,9 +63,9 @@ function handleClick(hotelName) {
 					<div class="hotel-price">
 						<span>от {{ priceCalculation(slide.price) }}</span>
 						<a href="#" class="prime-btn custom"
-							 :data-onlyhotel-lookup-destination="slide.name"
-							 :data-onlyhotel-lookup-depth-days="14"
-							 :data-onlyhotel-lookup-depth-nights="7"
+							 :data-onlyhotel-lookup-destination="currentCountry"
+							 :data-onlyhotel-lookup-regions="slide.name"
+							 :data-onlyhotel-lookup-depth-days="SEARCH_DEPTH"
 							 @click="handleClick(slide.name)"
 						>
 							Забронировать
@@ -74,27 +76,42 @@ function handleClick(hotelName) {
 				</div>
 			</swiper-slide>
 		</swiper-container>
-
-		<button class="custom-slider-nav-btn brandus-slider-bnt-next">
+		<button class="custom-slider-nav-btn brandus-bnt-next">
 			<svg fill="none" height="9" viewBox="0 0 6 9" width="6" xmlns="http://www.w3.org/2000/svg">
-				<path d="M1.25 1.16504L4.58333 4.49837L1.25 7.83171" stroke="#535353" stroke-linejoin="round"></path>
+				<path d="M1.25 1.16504L4.58333 4.49837L1.25 7.83171" stroke="#535353" stroke-linejoin="round"/>
 			</svg>
 		</button>
+	</div>
+
+	<!-- После загрузки: если отелей нет — заглушка -->
+	<div v-else class="stub">
+		<h3>К сожалению, сейчас нет отелей, доступных для заселения.</h3>
+		<span>Попробуйте вернуться позже — предложения регулярно обновляются.</span>
 	</div>
 </template>
 
 <style scoped lang="scss">
 @use '../../../../common/css/mixins';
 
-.brand-slider-next {
-right: 16px;
+.stub {
+	background: #FFFFFF;
+	min-height: 341px;
+	padding: 16px;
+	margin-right: 16px;
+	border-radius: 12px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	gap: 16px;
 }
 
-.slider-bnt-prev {
+.brandus-bnt-next {
 	left: 16px;
 }
 
-.brandus-slider-bnt-next {
+.slider-bnt-next {
 	right: 16px;
 
 	@media (max-width: 768px) {
@@ -102,7 +119,8 @@ right: 16px;
 	}
 }
 
-.brandus-slider-bnt-next.swiper-button-disabled {
+.slider-bnt-next.swiper-button-disabled,
+.slider-bnt-prev.swiper-button-disabled {
 	display: none;
 }
 

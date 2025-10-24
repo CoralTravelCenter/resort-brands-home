@@ -1,9 +1,11 @@
 <script setup>
 import {computed, inject, onBeforeUnmount, onMounted, ref} from 'vue'
 
+const COUNTRIES = window.COUNTRIES
+
 const currentCountry = inject('currentCountry')
 const options = computed(() => {
-	return window.COUNTRIES.flatMap(obj => Object.keys(obj))
+	return COUNTRIES.flatMap(obj => Object.keys(obj))
 })
 
 const open = ref(false)
@@ -16,8 +18,8 @@ const toggleDropdown = () => {
 const selectOption = (option) => {
 	currentCountry.value = option
 	open.value = false
-	ym(96674199,'reachGoal','filter_by_country', {
-		country:  currentCountry.value
+	ym(96674199, 'reachGoal', 'filter_by_country', {
+		country: currentCountry.value
 	})
 }
 

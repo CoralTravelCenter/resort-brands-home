@@ -2,9 +2,11 @@
 import {computed, inject} from "vue";
 import HotelsSlider from "./HotelsSlider.vue";
 
+const SLOGANS = window.SLOGANS;
+
 const currentBrand = inject('currentBrand')
 const currentSlogan = computed(() => {
-	return window.SLOGANS.find(obj => obj.name === currentBrand.value)
+	return SLOGANS.find(obj => obj.name === currentBrand.value)
 })
 const currentBrandUppercased = computed(() => currentBrand.value.toUpperCase())
 </script>
@@ -57,7 +59,6 @@ h3 {
 }
 
 span {
-	margin-bottom: 48px;
 	color: rgba(255, 255, 255, 0.85);
 }
 </style>
